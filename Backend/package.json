@@ -1,0 +1,14 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Admin Pannel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Manisha Soni",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
