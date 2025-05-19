@@ -199,7 +199,7 @@ const AdminSignupForm = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-200"
+          className="w-full bg-purple-800 text-white py-2 px-4 rounded-lg hover:bg-purple-700 transition duration-200"
         >
           Create Admin
         </button>

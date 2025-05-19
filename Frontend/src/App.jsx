@@ -10,15 +10,17 @@ export default function App() {
     <Router>
       <div className="flex h-screen">
         <Sidebar />
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-col flex-1 min-h-screen">
           <Header />
-          <main className="flex-1 p-8 overflow-auto">
-            <Routes>
-              <Route path="/admin" element={<Admin />} />
-              <Route path="/admin/create" element={<AdminSignupForm />} />
-            </Routes>
+          <main className="flex-1 p-8 overflow-auto bg-gray-50">
+            <div className="container mx-auto min-h-[calc(100vh-200px)]">
+              <Routes>
+                <Route path="/admin" element={<Admin />} />
+                <Route path="/admin/create" element={<AdminSignupForm />} />
+              </Routes>
+            </div>
           </main>
-          <Footer />
+          <Footer className="mt-auto" />
         </div>
       </div>
     </Router>
