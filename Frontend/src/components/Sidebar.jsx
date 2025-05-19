@@ -9,7 +9,7 @@ const Sidebar = () => {
     { title: 'Dashboard', icon: '📊', path: '/dashboard' },
     { title: 'Properties', icon: '🏠', path: '/properties' },
     { title: 'Admin', icon: '👥', path: '/admin' },
-    { title: 'Agents', icon: '👤', path: '/agents' },
+    { title: 'Agents', icon: '🧑‍💼', path: '/agents' },
     { title: 'Blogs', icon: '📝', path: '/blogs' },
     { title: 'Contact', icon: '📞', path: '/contact' },
     { title: 'Settings', icon: '⚙️', path: '/settings' },
@@ -22,13 +22,15 @@ const Sidebar = () => {
   };
 
   return (
-    <div className={`bg-white shadow-lg text-gray-800 min-h-screen transition-all duration-300 
-      ${isCollapsed ? 'w-20' : 'w-64'}`}>
+    <div
+      className={`bg-white shadow-lg text-gray-800 min-h-screen transition-all duration-300 
+      ${isCollapsed ? 'w-20' : 'w-64'}`}
+    >
       <div className="flex items-center justify-between p-4 border-b">
         <div className={`font-bold ${isCollapsed ? 'hidden' : 'block'}`}>
           RealEstate Admin
         </div>
-        <button 
+        <button
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="p-2 rounded-lg hover:bg-purple-200  bg-purple-800 transition-colors"
         >
@@ -39,8 +41,8 @@ const Sidebar = () => {
           </div>
         </button>
       </div>
-      
-      <nav className="p-4 flex flex-col justify-between h-[calc(100%-64px)]">
+
+      <nav className="p-4">
         <ul className="space-y-2">
           {menuItems.map((item) => (
             <li key={item.title}>
@@ -60,20 +62,21 @@ const Sidebar = () => {
               </NavLink>
             </li>
           ))}
-        </ul>
 
-        {/* Logout Button */}
-        <div className="mt-auto pt-4 border-t">
-          <button
-            onClick={handleLogout}
-            className={`w-full flex items-center ${
-              isCollapsed ? 'justify-center' : 'space-x-3'
-            } p-3 rounded-lg text-red-600 hover:bg-red-100 transition-colors`}
-          >
-            <span className="text-xl">🚪</span>
-            <span className={`${isCollapsed ? 'hidden' : 'block'}`}>Logout</span>
-          </button>
-        </div>
+          {/* Logout directly after Settings */}
+          <li>
+            <button
+              onClick={handleLogout}
+              className={`w-full flex items-center ${
+                isCollapsed ? 'justify-center' : 'space-x-3'
+              } p-3 rounded-lg text-red-600 hover:bg-red-100 transition-colors`}
+              title="Logout"
+            >
+              <span className="text-xl">🔓</span>
+              <span className={`${isCollapsed ? 'hidden' : 'block'}`}>Logout</span>
+            </button>
+          </li>
+        </ul>
       </nav>
     </div>
   );
