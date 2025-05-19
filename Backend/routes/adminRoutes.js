@@ -18,6 +18,6 @@ router.get('/', adminController.getAllAdmins);
 router.get('/:id', adminController.getAdminById);
 router.post('/create', adminValidationRules, adminController.createAdmin);
 router.put('/:id', adminValidationRules, adminController.updateAdmin);
-router.delete('/:id', adminController.deleteAdmin); n b
+router.delete('/:id', adminController.deleteAdmin); 
 
 module.exports = router;
