@@ -8,17 +8,12 @@ const AdminSignupForm = () => {
     Last_Name: '',
     Password: '',
     Email: '',
-    Facebook: '',
-    Twitter: '',
-    Website: '',
-    Public_email: '',
-    Phone: '',
-    FAX: '',
-    user_image: ''
+    Phone: ''  // Add Phone field
   });
 
   const [errors, setErrors] = useState({});
 
+  // Add phone validation in validateForm
   const validateForm = () => {
     const newErrors = {};
     
@@ -51,25 +46,10 @@ const AdminSignupForm = () => {
     }
 
     // Phone validation
-    if (formData.Phone && !/^\d{10}$/.test(formData.Phone)) {
+    if (!formData.Phone.trim()) {
+      newErrors.Phone = 'Phone number is required';
+    } else if (!/^\d{10}$/.test(formData.Phone)) {
       newErrors.Phone = 'Phone number must be 10 digits';
-    }
-
-    // URL validations
-    const urlRegex = /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/;
-    if (formData.Website && !urlRegex.test(formData.Website)) {
-      newErrors.Website = 'Invalid website URL';
-    }
-    if (formData.Facebook && !urlRegex.test(formData.Facebook)) {
-      newErrors.Facebook = 'Invalid Facebook URL';
-    }
-    if (formData.Twitter && !urlRegex.test(formData.Twitter)) {
-      newErrors.Twitter = 'Invalid Twitter URL';
-    }
-
-    // Add this to your validateForm function
-    if (formData.FAX && !/^\d{10}$/.test(formData.FAX)) {
-      newErrors.FAX = 'FAX number must be 10 digits';
     }
 
     setErrors(newErrors);
@@ -82,7 +62,6 @@ const AdminSignupForm = () => {
       ...prev,
       [name]: value
     }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({
         ...prev,
@@ -111,17 +90,10 @@ const AdminSignupForm = () => {
             Last_Name: '',
             Password: '',
             Email: '',
-            Facebook: '',
-            Twitter: '',
-            Website: '',
-            Public_email: '',
-            Phone: '',
-            FAX: '',
-            user_image: ''
+            Phone: ''  // Add Phone reset
           });
           navigate('/admin');
         } else {
-          // Handle validation errors from backend
           if (data.errors) {
             const backendErrors = {};
             if (Array.isArray(data.errors)) {
@@ -129,7 +101,6 @@ const AdminSignupForm = () => {
                 backendErrors[error.param] = error.msg;
               });
             } else {
-              // If errors is an object
               Object.keys(data.errors).forEach(key => {
                 backendErrors[key] = data.errors[key];
               });
@@ -141,7 +112,7 @@ const AdminSignupForm = () => {
         }
       } catch (error) {
         console.error('Error creating admin:', error);
-        alert('Failed to create admin. Please check the console for details.');
+        alert('Failed to create admin');
       }
     }
   };
@@ -211,7 +182,6 @@ const AdminSignupForm = () => {
             <p className="text-red-500 text-sm mt-1">{errors.Password}</p>
           )}
         </div>
-
         <div>
           <label className="block text-gray-700 mb-2">Phone</label>
           <input
@@ -220,96 +190,11 @@ const AdminSignupForm = () => {
             value={formData.Phone}
             onChange={handleChange}
             className={inputClasses('Phone')}
+            placeholder="1234567890"
           />
           {errors.Phone && (
             <p className="text-red-500 text-sm mt-1">{errors.Phone}</p>
           )}
-        </div>
-
-        <div>
-          {/* // Update the FAX input field */}
-          <div>
-            <label className="block text-gray-700 mb-2">FAX (Optional)</label>
-            <input
-              type="tel"
-              name="FAX"
-              value={formData.FAX}
-              onChange={handleChange}
-              className={inputClasses('FAX')}
-              placeholder="1234567890"
-            />
-            {errors.FAX && (
-              <p className="text-red-500 text-sm mt-1">{errors.FAX}</p>
-            )}
-          </div>
-        </div>
-
-        <div>
-          <label className="block text-gray-700 mb-2">Website</label>
-          <input
-            type="url"
-            name="Website"
-            value={formData.Website}
-            onChange={handleChange}
-            className={inputClasses('Website')}
-            placeholder="https://example.com"
-          />
-          {errors.Website && (
-            <p className="text-red-500 text-sm mt-1">{errors.Website}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-gray-700 mb-2">Public Email</label>
-          <input
-            type="email"
-            name="Public_email"
-            value={formData.Public_email}
-            onChange={handleChange}
-            className={inputClasses('Public_email')}
-          />
-        </div>
-
-        <div>
-          <label className="block text-gray-700 mb-2">Facebook</label>
-          <input
-            type="url"
-            name="Facebook"
-            value={formData.Facebook}
-            onChange={handleChange}
-            className={inputClasses('Facebook')}
-            placeholder="https://facebook.com/username"
-          />
-          {errors.Facebook && (
-            <p className="text-red-500 text-sm mt-1">{errors.Facebook}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-gray-700 mb-2">Twitter</label>
-          <input
-            type="url"
-            name="Twitter"
-            value={formData.Twitter}
-            onChange={handleChange}
-            className={inputClasses('Twitter')}
-            placeholder="https://twitter.com/username"
-          />
-          {errors.Twitter && (
-            <p className="text-red-500 text-sm mt-1">{errors.Twitter}</p>
-          )}
-        </div>
-
-        <div>
-          <label className="block text-gray-700 mb-2">Profile Image URL</label>
-          <input
-            type="url"
-            name="user_image"
-            value={formData.user_image}
-            onChange={handleChange}
-            className={inputClasses('user_image')}
-            placeholder="https://example.com/image.jpg"
-          />
         </div>
 
         <button

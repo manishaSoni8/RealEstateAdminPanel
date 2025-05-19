@@ -37,12 +37,17 @@ const adminController = {
                 return res.status(400).json({ errors: errors.array() });
             }
 
-            const { Email, Password, ...otherData } = req.body;
+            const { Email, Password, Phone, ...otherData } = req.body;
 
             // Check if admin already exists
             const existingAdmin = await Admin.findOne({ Email });
             if (existingAdmin) {
                 return res.status(400).json({ message: 'Email already registered' });
+            }
+
+            // Validate phone number
+            if (!Phone || !/^\d{10}$/.test(Phone)) {
+                return res.status(400).json({ message: 'Invalid phone number. Must be 10 digits.' });
             }
 
             // Hash password
@@ -51,6 +56,7 @@ const adminController = {
             const admin = new Admin({
                 ...otherData,
                 Email,
+                Phone,
                 Password: hashedPassword,
                 user_type_id: ADMIN_USER_TYPE_ID
             });
@@ -66,14 +72,22 @@ const adminController = {
     // Update admin
     updateAdmin: async (req, res) => {
         try {
-            // Check for validation errors
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
                 return res.status(400).json({ errors: errors.array() });
             }
 
-            const { Password, ...updateData } = req.body;
+            const { Password, Phone, ...updateData } = req.body;
             let update = updateData;
+
+            // Validate phone number if it's being updated
+            if (Phone && !/^\d{10}$/.test(Phone)) {
+                return res.status(400).json({ message: 'Invalid phone number. Must be 10 digits.' });
+            }
+
+            if (Phone) {
+                update.Phone = Phone;
+            }
 
             if (Password) {
                 const hashedPassword = await bcrypt.hash(Password, 10);
@@ -82,8 +96,8 @@ const adminController = {
 
             const admin = await Admin.findByIdAndUpdate(
                 req.params.id,
-                update,
-                { new: true }
+                    update,
+                { new: true, runValidators: true }
             ).select('-Password');
 
             if (!admin) {
