@@ -17,34 +17,6 @@ const adminSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
-    Facebook: {
-        type: String,
-        default: null
-    },
-    Twitter: {
-        type: String,
-        default: null
-    },
-    Website: {
-        type: String,
-        default: null
-    },
-    Public_email: {
-        type: String,
-        default: null
-    },
-    Phone: {
-        type: String,
-        default: null
-    },
-    FAX: {
-        type: String,
-        default: null
-    },
-    user_image: {
-        type: String,
-        default: null
-    },
     user_type_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'userType',
