@@ -13,19 +13,19 @@ const transporter = nodemailer.createTransport(sendgridTransport({
 // Admin Login
 exports.postAdminLogin = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { Email, Password } = req.body;
  
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ message: 'Validation failed', errors: errors.array() });
     }
  
-    const admin = await Admin.findOne({ Email:email });
+    const admin = await Admin.findOne({ Email });
     if (!admin) {
       return res.status(401).json({ message: 'No user found with this email' });
     }
  
-    const isMatch = await bcrypt.compare(password, admin.Password);
+    const isMatch = await bcrypt.compare(Password, admin.Password);
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid password' });
     }
