@@ -25,8 +25,7 @@ function LayoutWrapper() {
       <div className="flex flex-col flex-1">
         <Header />
         <main className="flex-grow p-8 overflow-auto">
-          <Routes>
-            {/* Public Routes */}
+          <Routes> 
             <Route
               path="/"
               element={
@@ -59,8 +58,6 @@ function LayoutWrapper() {
                 </PublicRoute>
               }
             />
-
-            {/* Protected Routes */}
             <Route
               path="/admin"
               element={

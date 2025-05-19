@@ -3,19 +3,35 @@ import React, { useEffect, useState } from 'react';
 const Header = () => {
   const [userName, setUserName] = useState('');
 
-  useEffect(() => {
-    // Get the user info from localStorage
+  const updateUser = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
         const user = JSON.parse(storedUser);
-        setUserName(user.name || 'Admin'); // Corrected this line
+        setUserName(user.name || 'Admin');
       } catch {
         setUserName('Admin');
       }
     } else {
       setUserName('Admin');
     }
+  };
+
+  useEffect(() => {
+    updateUser(); // Run on mount
+
+    // Run on logout
+    const handleLogout = () => updateUser();
+
+    window.addEventListener('logout', handleLogout);
+
+    // Optional: Also listen to storage changes from other tabs
+    window.addEventListener('storage', handleLogout);
+
+    return () => {
+      window.removeEventListener('logout', handleLogout);
+      window.removeEventListener('storage', handleLogout);
+    };
   }, []);
 
   return (
