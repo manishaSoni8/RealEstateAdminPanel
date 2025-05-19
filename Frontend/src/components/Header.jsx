@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-
+ 
 const Header = () => {
   const [userName, setUserName] = useState('');
-
-  useEffect(() => {
-    
+ 
+  const updateUser = () => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
@@ -17,24 +16,24 @@ const Header = () => {
       setUserName('Admin');
     }
   };
-
+ 
   useEffect(() => {
     updateUser(); // Run on mount
-
+ 
     // Run on logout
     const handleLogout = () => updateUser();
-
+ 
     window.addEventListener('logout', handleLogout);
-
+ 
     // Optional: Also listen to storage changes from other tabs
     window.addEventListener('storage', handleLogout);
-
+ 
     return () => {
       window.removeEventListener('logout', handleLogout);
       window.removeEventListener('storage', handleLogout);
     };
   }, []);
-
+ 
   return (
     <header className="bg-purple-200 h-16 shadow-md">
       <div className="container mx-auto px-4 py-3">
@@ -52,5 +51,5 @@ const Header = () => {
     </header>
   );
 };
-
+ 
 export default Header;
