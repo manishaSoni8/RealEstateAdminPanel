@@ -83,7 +83,7 @@ const AdminCard = () => {
                   </p>
                 </div>
               </div>
-              <div className="mt-6 flex flex-wrap justify-center items-center gap-3">
+              <div className="mt-6 flex flex-wrap justify-center  items-center gap-3">
                 <button className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-800 font-medium transition-colors duration-300">
                   View Details
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
