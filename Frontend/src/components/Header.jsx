@@ -1,6 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Header = () => {
+  const [userName, setUserName] = useState('');
+
+  useEffect(() => {
+    // Get the user info from localStorage
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const user = JSON.parse(storedUser);
+        setUserName(user.name || 'Admin'); // Corrected this line
+      } catch {
+        setUserName('Admin');
+      }
+    } else {
+      setUserName('Admin');
+    }
+  }, []);
+
   return (
     <header className="bg-purple-200 h-16 shadow-md">
       <div className="container mx-auto px-4 py-3">
@@ -10,8 +27,7 @@ const Header = () => {
           </div>
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <span className="text-gray-700">Admin</span>
-             {/* here i wil image for the Admin */}
+              <span className="text-gray-700">{userName}</span>
             </div>
           </div>
         </div>

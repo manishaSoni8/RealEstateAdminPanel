@@ -19,11 +19,11 @@ function LayoutWrapper() {
     location.pathname === '/admin-reset/:token';
  
   return (
-    <div className="flex h-screen">
+    <div className="flex min-h-screen">
       {!hideLayout && <Sidebar />}
       <div className="flex flex-col flex-1">
-        {<Header />}
-        <main className="flex-1 p-8 overflow-auto">
+        <Header />
+        <main className="flex-grow p-8 overflow-auto">
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/admin-login" element={<Login />} />
@@ -34,12 +34,13 @@ function LayoutWrapper() {
             <Route path="/admin/create" element={<AdminSignupForm />} />
           </Routes>
         </main>
-        { <Footer />}
+        <Footer />
       </div>
     </div>
   );
 }
- 
+
+
 export default function App() {
   return (
     <Router>

@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const adminController = require('../controllers/adminController');
+const isAuth = require('../middleware/is-auth');
+
 
 const adminValidationRules = [
     body('First_Name').trim().isLength({ min: 2 }).withMessage('First name must be at least 2 characters'),

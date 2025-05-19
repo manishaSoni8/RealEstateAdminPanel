@@ -6,21 +6,6 @@ const Admin = require('../models/admin');
 const jwt = require('jsonwebtoken');
 const Config = require('../config/auth.config');
 
-
-// const morgan = require('morgan');
-// const fs = require('fs');
-// const path = require('path');
- 
-// const accessLogStream = fs.createWriteStream(
-//   path.join(__dirname, '../logs/auth.log'),
-//   { flags: 'a' }
-// );
- 
-// // Apply morgan only to auth routes
-// router.use(morgan('combined', { stream: accessLogStream }));
-
-
-
 router.post('/admin-login', [
     check('Email')
         .isEmail()
