@@ -83,21 +83,7 @@ const AdminCard = () => {
                   </p>
                 </div>
               </div>
-              <div className="mt-6 flex flex-wrap justify-between items-center gap-3">
-                <div className="flex flex-wrap items-center gap-2">
-                  <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                    admin.is_verified 
-                      ? 'bg-green-100 text-green-800' 
-                      : 'bg-yellow-100 text-yellow-800'
-                  }`}>
-                    {admin.is_verified ? 'Verified' : 'Pending'}
-                  </span>
-                  {admin.is_blocked && (
-                    <span className="px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-                      Blocked
-                    </span>
-                  )}
-                </div>
+              <div className="mt-6 flex flex-wrap justify-center items-center gap-3">
                 <button className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-800 font-medium transition-colors duration-300">
                   View Details
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
