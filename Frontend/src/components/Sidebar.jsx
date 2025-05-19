@@ -29,13 +29,13 @@ const Sidebar = () => {
     >
       <div className="flex items-center justify-between p-4 border-b">
         <div className={`font-bold ${isCollapsed ? 'hidden' : 'block'}`}>
-          RealEstate Admin
+          Garo Estate
         </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-2 rounded-lg hover:bg-purple-200  bg-purple-800 transition-colors"
+          className="p-2 rounded-lg hover:bg-purple-400  bg-purple-800 transition-colors"
         >
-          <div className="flex flex-col space-y-1 hover:bg-purple-200">
+          <div className="flex flex-col space-y-1 hover:bg-purple-200 ">
             <span className="w-4 h-0.5 bg-gray-100"></span>
             <span className="w-4 h-0.5 bg-gray-100"></span>
             <span className="w-4 h-0.5 bg-gray-100"></span>
