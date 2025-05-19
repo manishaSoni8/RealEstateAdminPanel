@@ -4,12 +4,12 @@ const Header = () => {
   const [userName, setUserName] = useState('');
 
   useEffect(() => {
-    // Get the user info from localStorage
+    
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
         const user = JSON.parse(storedUser);
-        setUserName(user.name || 'Admin'); // Corrected this line
+        setUserName(user.name || 'Admin');
       } catch {
         setUserName('Admin');
       }

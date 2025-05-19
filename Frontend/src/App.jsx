@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation, matchPath } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -9,30 +9,69 @@ import ForgotPassword from './pages/admin/ForgotPassword';
 import ResetPassword from './pages/admin/ResetPassword';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
-
+ 
 function LayoutWrapper() {
   const location = useLocation();
-
-  const hideLayout =
-    location.pathname === '/' ||
-    location.pathname === '/admin-login' ||
-    location.pathname === '/forgot-password' ||
-    location.pathname === '/admin-reset/:token' ||  location.pathname === 'http://localhost:5174/admin-reset/${token}';
+ 
+  const hideSidebar =
+    ['/', '/admin-login', '/forgot-password'].includes(location.pathname) ||
+    matchPath('/admin-reset/:token', location.pathname);
  
   return (
     <div className="flex min-h-screen">
-      {!hideLayout && <Sidebar />}
+      {!hideSidebar && <Sidebar />}
       <div className="flex flex-col flex-1">
         <Header />
         <main className="flex-grow p-8 overflow-auto">
           <Routes>
-            <Route path="/" element={<Login />} />
-            <Route path="/admin-login" element={<Login />} />
-            <Route path="/forgot-password" element={<ForgotPassword />} />
-            <Route path="/admin-reset/:token" element={<ResetPassword />} />
-            <Route path="/admin-reset/${token}" element={<ResetPassword />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/admin/create" element={<AdminSignupForm />} />
+            <Route
+              path="/"
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/admin-login"
+              element={
+                <PublicRoute>
+                  <Login />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/forgot-password"
+              element={
+                <PublicRoute>
+                  <ForgotPassword />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/admin-reset/:token"
+              element={
+                <PublicRoute>
+                  <ResetPassword />
+                </PublicRoute>
+              }
+            />
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <Admin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/create"
+              element={
+                <ProtectedRoute>
+                  <AdminSignupForm />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
         <Footer />
@@ -40,7 +79,7 @@ function LayoutWrapper() {
     </div>
   );
 }
-
+ 
 export default function App() {
   return (
     <Router>

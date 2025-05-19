@@ -8,16 +8,16 @@ const AdminSignupForm = () => {
     Last_Name: '',
     Password: '',
     Email: '',
-    Phone: ''  // Add Phone field
+    Phone: ''  
   });
 
   const [errors, setErrors] = useState({});
 
-  // Add phone validation in validateForm
+ 
   const validateForm = () => {
     const newErrors = {};
     
-    // Name validations
+    
     if (!formData.First_Name.trim()) {
       newErrors.First_Name = 'First name is required';
     } else if (formData.First_Name.length < 2) {
@@ -30,7 +30,6 @@ const AdminSignupForm = () => {
       newErrors.Last_Name = 'Last name must be at least 2 characters';
     }
 
-    // Email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.Email) {
       newErrors.Email = 'Email is required';
@@ -38,14 +37,14 @@ const AdminSignupForm = () => {
       newErrors.Email = 'Invalid email format';
     }
 
-    // Password validation
+    
     if (!formData.Password) {
       newErrors.Password = 'Password is required';
     } else if (formData.Password.length < 6) {
       newErrors.Password = 'Password must be at least 6 characters';
     }
 
-    // Phone validation
+    
     if (!formData.Phone.trim()) {
       newErrors.Phone = 'Phone number is required';
     } else if (!/^\d{10}$/.test(formData.Phone)) {
@@ -90,7 +89,7 @@ const AdminSignupForm = () => {
             Last_Name: '',
             Password: '',
             Email: '',
-            Phone: ''  // Add Phone reset
+            Phone: ''  
           });
           navigate('/admin');
         } else {

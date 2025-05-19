@@ -24,9 +24,9 @@ const Login = () => {
 
       if (response.ok && result.token) {
         console.log(result);
-        localStorage.setItem('token', result.token); // Store JWT token
-        localStorage.setItem('user', JSON.stringify(result.admin)); // Save user info as string
-        navigate('/admin'); // Redirect to protected admin route
+        localStorage.setItem('token', result.token); 
+        localStorage.setItem('user', JSON.stringify(result.admin)); 
+        navigate('/admin'); 
       } else {
         setError(result.message || 'Login failed');
       }
