@@ -17,7 +17,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://balajipathak:pUo5vnHt
 
 // Routes
 const adminRoutes = require('./routes/adminRoutes');
+const adminloginRoutes = require('./routes/admin');
 app.use('/admin', adminRoutes);
+app.use(adminloginRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
