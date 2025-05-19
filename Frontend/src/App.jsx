@@ -7,11 +7,12 @@ import AdminSignupForm from './components/forms/AdminSignupForm';
 import Login from './pages/admin/Login';
 import ForgotPassword from './pages/admin/ForgotPassword';
 import ResetPassword from './pages/admin/ResetPassword';
- 
+import PublicRoute from './components/PublicRoute';
+import ProtectedRoute from './components/ProtectedRoute';
+
 function LayoutWrapper() {
   const location = useLocation();
- 
-  // Hide layout for login, forgot, and reset pages
+
   const hideLayout =
     location.pathname === '/' ||
     location.pathname === '/admin-login' ||
@@ -39,7 +40,6 @@ function LayoutWrapper() {
     </div>
   );
 }
-
 
 export default function App() {
   return (
