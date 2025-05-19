@@ -17,6 +17,10 @@ const adminSchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    Phone: {
+        type: String,
+        required: true,
+    },
     user_type_id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'userType',
@@ -36,4 +40,5 @@ const adminSchema = new mongoose.Schema({
 }, {
     timestamps: true
 });
+
 module.exports = mongoose.model('Admin', adminSchema);

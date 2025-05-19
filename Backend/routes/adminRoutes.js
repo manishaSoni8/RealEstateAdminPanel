@@ -7,11 +7,7 @@ const adminValidationRules = [
     body('First_Name').trim().isLength({ min: 2 }).withMessage('First name must be at least 2 characters'),
     body('Last_Name').trim().isLength({ min: 2 }).withMessage('Last name must be at least 2 characters'),
     body('Email').isEmail().withMessage('Invalid email format'),
-    body('Password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
-    body('Phone').optional().matches(/^\d{10}$/).withMessage('Phone number must be 10 digits'),
-    body('Website').optional().isURL().withMessage('Invalid website URL'),
-    body('Facebook').optional().isURL().withMessage('Invalid Facebook URL'),
-    body('Twitter').optional().isURL().withMessage('Invalid Twitter URL')
+    body('Password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters')
 ];
 
 router.get('/', adminController.getAllAdmins);
