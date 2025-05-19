@@ -17,7 +17,7 @@ const response = await fetch('http://localhost:3005/admin-login', {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ Email: email, Password: password })  
+      body: JSON.stringify({ Email: email, Password: password })  // updated here
     });
  
     const result = await response.json();
@@ -32,8 +32,8 @@ const response = await fetch('http://localhost:3005/admin-login', {
   }
 };
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
+      <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg ">
         <h2 className="text-2xl font-bold text-purple-800 text-center mb-6">Admin Login</h2>
         {error && <p className="text-red-600 text-sm mb-4">{error}</p>}
         <form onSubmit={handleLogin}>
