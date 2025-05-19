@@ -15,7 +15,7 @@ function LayoutWrapper() {
     <div className="flex h-screen">
       {!hideLayout && <Sidebar />}
       <div className="flex flex-col flex-1">
-        {hideLayout && <Header />}
+        {<Header />}
         <main className="flex-1 p-8 overflow-auto">
           <Routes>
             <Route path="/" element={<Login />} />
@@ -24,7 +24,7 @@ function LayoutWrapper() {
             <Route path="/admin/create" element={<AdminSignupForm />} />
           </Routes>
         </main>
-        {hideLayout && <Footer />}
+        { <Footer />}
       </div>
     </div>
   );
