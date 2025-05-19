@@ -17,8 +17,8 @@ function LayoutWrapper() {
     location.pathname === '/' ||
     location.pathname === '/admin-login' ||
     location.pathname === '/forgot-password' ||
-    location.pathname.startsWith('/admin-reset');
-
+    location.pathname === '/admin-reset/:token' ||  location.pathname === 'http://localhost:5174/admin-reset/${token}';
+ 
   return (
     <div className="flex min-h-screen">
       {!hideLayout && <Sidebar />}
