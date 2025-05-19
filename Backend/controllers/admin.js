@@ -95,7 +95,7 @@ exports.postAdminReset = async (req, res) => {
                 subject: 'Password Reset',
                 html: `
                     <p>You requested a password reset</p>
-                    <p>Click this <a href="${process.env.BASE_URL || 'http://localhost:3005'}/reset/${token}">link</a> to set a new password.</p>
+                    <p>Click this <a href="${process.env.CLIENT_BASE_URL || 'http://localhost:5174'}/admin-reset/${token}">link</a> to set a new password.</p>
                 `
             });
  
@@ -111,7 +111,6 @@ exports.postAdminReset = async (req, res) => {
 exports.getAdminNewPassword = async (req, res) => {
   try {
     const token = req.params.token;
- 
     const admin = await Admin.findOne({
       resetToken: token,
       resetTokenExpiration: { $gt: Date.now() }
@@ -124,6 +123,7 @@ exports.getAdminNewPassword = async (req, res) => {
     res.status(200).json({
       message: 'Token valid',
       adminId: admin._id.toString(),
+      email: admin.Email,
       resetToken: token
     });
   } catch (err) {

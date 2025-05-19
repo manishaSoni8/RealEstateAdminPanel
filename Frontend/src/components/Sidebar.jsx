@@ -23,12 +23,12 @@ const Sidebar = () => {
         </div>
         <button 
           onClick={() => setIsCollapsed(!isCollapsed)}
-          className="p-2 rounded-lg hover:bg-puple-300  transition-colors"
+          className="p-2 rounded-lg hover:bg-purple-200  bg-purple-800 transition-colors"
         >
-          <div className="flex flex-col space-y-1 hover:bg-puple-300">
-            <span className="w-4 h-0.5 bg-gray-600"></span>
-            <span className="w-4 h-0.5 bg-gray-600"></span>
-            <span className="w-4 h-0.5 bg-gray-600"></span>
+          <div className="flex flex-col space-y-1 hover:bg-purple-200">
+            <span className="w-4 h-0.5 bg-gray-100"></span>
+            <span className="w-4 h-0.5 bg-gray-100"></span>
+            <span className="w-4 h-0.5 bg-gray-100"></span>
           </div>
         </button>
       </div>

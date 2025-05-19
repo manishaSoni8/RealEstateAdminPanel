@@ -5,11 +5,18 @@ import Footer from './components/Footer';
 import Admin from './pages/admin/Admin';
 import AdminSignupForm from './components/forms/AdminSignupForm';
 import Login from './pages/admin/Login';
-
+import ForgotPassword from './pages/admin/ForgotPassword';
+import ResetPassword from './pages/admin/ResetPassword';
  
 function LayoutWrapper() {
   const location = useLocation();
-  const hideLayout = location.pathname === '/' || location.pathname === '/admin-login';
+ 
+  // Hide layout for login, forgot, and reset pages
+  const hideLayout =
+    location.pathname === '/' ||
+    location.pathname === '/admin-login' ||
+    location.pathname === '/forgot-password' ||
+    location.pathname === '/admin-reset/:token';
  
   return (
     <div className="flex h-screen">
@@ -20,6 +27,9 @@ function LayoutWrapper() {
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/admin-login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/admin-reset/:token" element={<ResetPassword />} />
+         
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/create" element={<AdminSignupForm />} />
           </Routes>
