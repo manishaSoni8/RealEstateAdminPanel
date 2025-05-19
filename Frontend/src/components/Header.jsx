@@ -16,6 +16,23 @@ const Header = () => {
     } else {
       setUserName('Admin');
     }
+  };
+
+  useEffect(() => {
+    updateUser(); // Run on mount
+
+    // Run on logout
+    const handleLogout = () => updateUser();
+
+    window.addEventListener('logout', handleLogout);
+
+    // Optional: Also listen to storage changes from other tabs
+    window.addEventListener('storage', handleLogout);
+
+    return () => {
+      window.removeEventListener('logout', handleLogout);
+      window.removeEventListener('storage', handleLogout);
+    };
   }, []);
 
   return (
