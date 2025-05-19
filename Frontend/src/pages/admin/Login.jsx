@@ -1,36 +1,40 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
- 
+
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
- 
+
   const handleLogin = async (e) => {
-  e.preventDefault();
-  setError('');
- 
-  try {
-const response = await fetch('http://localhost:3005/admin-login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ Email: email, Password: password })  // updated here
-    });
- 
-    const result = await response.json();
- 
-    if (response.ok) {
-      navigate('/admin');
-    } else {
-      setError(result.message || 'Login failed');
+    e.preventDefault();
+    setError('');
+
+    try {
+      const response = await fetch('http://localhost:3005/admin-login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ Email: email, Password: password })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.token) {
+        console.log(result);
+        localStorage.setItem('token', result.token); // Store JWT token
+        localStorage.setItem('user', JSON.stringify(result.admin)); // Save user info as string
+        navigate('/admin'); // Redirect to protected admin route
+      } else {
+        setError(result.message || 'Login failed');
+      }
+    } catch (err) {
+      setError('Network error. Try again.');
     }
-  } catch (err) {
-    setError('Network error. Try again.');
-  }
-};
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 ">
       <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg ">
@@ -73,5 +77,5 @@ const response = await fetch('http://localhost:3005/admin-login', {
     </div>
   );
 };
- 
+
 export default Login;

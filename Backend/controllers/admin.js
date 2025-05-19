@@ -42,7 +42,7 @@ exports.postAdminLogin = async (req, res) => {
       admin: {
         id: admin._id,
         email: admin.Email,
-        name: admin.Name
+        name: admin.First_Name
       }
     });
   } catch (err) {

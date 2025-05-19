@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const navigate = useNavigate();
 
   const menuItems = [
     { title: 'Dashboard', icon: '📊', path: '/dashboard' },
@@ -13,6 +14,12 @@ const Sidebar = () => {
     { title: 'Contact', icon: '📞', path: '/contact' },
     { title: 'Settings', icon: '⚙️', path: '/settings' },
   ];
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    navigate('/admin-login');
+  };
 
   return (
     <div className={`bg-white shadow-lg text-gray-800 min-h-screen transition-all duration-300 
@@ -32,7 +39,8 @@ const Sidebar = () => {
           </div>
         </button>
       </div>
-      <nav className="p-4">
+      
+      <nav className="p-4 flex flex-col justify-between h-[calc(100%-64px)]">
         <ul className="space-y-2">
           {menuItems.map((item) => (
             <li key={item.title}>
@@ -53,6 +61,19 @@ const Sidebar = () => {
             </li>
           ))}
         </ul>
+
+        {/* Logout Button */}
+        <div className="mt-auto pt-4 border-t">
+          <button
+            onClick={handleLogout}
+            className={`w-full flex items-center ${
+              isCollapsed ? 'justify-center' : 'space-x-3'
+            } p-3 rounded-lg text-red-600 hover:bg-red-100 transition-colors`}
+          >
+            <span className="text-xl">🚪</span>
+            <span className={`${isCollapsed ? 'hidden' : 'block'}`}>Logout</span>
+          </button>
+        </div>
       </nav>
     </div>
   );
