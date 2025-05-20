@@ -1,5 +1,5 @@
 import React from 'react';
-import PropertyCard from './PropertyCard';
+import PropertyCard from './propertyCard';
 
 const Property = () => {
   return (

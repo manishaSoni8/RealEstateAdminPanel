@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import defaultPropertyImage from '../../assets/default-property';
 
 const SingleProperty = () => {
   const { id } = useParams();
@@ -27,52 +28,70 @@ const SingleProperty = () => {
   if (loading) return <div className="text-center py-8">Loading...</div>;
   if (!property) return <div className="text-center py-8">Property not found</div>;
 
+  const getImageUrl = (imagePath) => {
+    if (!imagePath) return defaultPropertyImage;
+    return `http://localhost:3005/uploads/${imagePath}`;
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">{property.name}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
           {/* Main Image Display */}
-          <div className="mb-4">
+          <div className="mb-4 relative">
             <img 
-              src={`http://localhost:3005/uploads/${selectedImage || property.image}`} 
+              src={getImageUrl(selectedImage || property.image)} 
               alt={property.name} 
               className="w-full h-96 object-cover rounded-lg shadow-lg" 
               onError={(e) => {
-                e.target.src = '/default-property.jpg';
+                e.target.src = defaultPropertyImage;
                 e.target.onerror = null;
               }}
             />
           </div>
           
-          {/* Additional Images Gallery */}
+          {/* Updated Thumbnails Gallery */}
           <div className="mt-6">
             <h3 className="text-xl font-semibold mb-3">Gallery</h3>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-3 gap-2">
               {/* Main property image thumbnail */}
-              <img 
-                src={`http://localhost:3005/uploads/${property.image}`} 
-                alt={property.name}
-                className={`w-full h-20 object-cover rounded cursor-pointer ${selectedImage === property.image ? 'ring-2 ring-purple-600' : ''}`}
+              <div 
+                className={`relative rounded overflow-hidden cursor-pointer ${
+                  selectedImage === property.image ? 'ring-2 ring-purple-600' : ''
+                }`}
                 onClick={() => setSelectedImage(property.image)}
-                onError={(e) => {
-                  e.target.src = '/default-property.jpg';
-                  e.target.onerror = null;
-                }}
-              />
-              {/* Additional images thumbnails */}
-              {property.additionalImages && property.additionalImages.map((img, index) => (
+              >
                 <img 
-                  key={index} 
-                  src={`http://localhost:3005/uploads/${img.image}`} 
-                  alt={`View ${index + 1} of ${property.name}`} 
-                  className={`w-full h-20 object-cover rounded cursor-pointer ${selectedImage === img.image ? 'ring-2 ring-purple-600' : ''}`}
-                  onClick={() => setSelectedImage(img.image)}
+                  src={getImageUrl(property.image)} 
+                  alt={property.name}
+                  className="w-full h-24 object-cover hover:opacity-90 transition-opacity"
                   onError={(e) => {
-                    e.target.src = '/default-property.jpg';
+                    e.target.src = defaultPropertyImage;
                     e.target.onerror = null;
                   }}
                 />
+              </div>
+
+              {/* Additional images thumbnails - limited to 2 more images */}
+              {property.additionalImages?.slice(0, 2).map((img, index) => (
+                <div 
+                  key={index}
+                  className={`relative rounded overflow-hidden cursor-pointer ${
+                    selectedImage === img.image ? 'ring-2 ring-purple-600' : ''
+                  }`}
+                  onClick={() => setSelectedImage(img.image)}
+                >
+                  <img 
+                    src={getImageUrl(img.image)} 
+                    alt={`View ${index + 1} of ${property.name}`} 
+                    className="w-full h-24 object-cover hover:opacity-90 transition-opacity"
+                    onError={(e) => {
+                      e.target.src = defaultPropertyImage;
+                      e.target.onerror = null;
+                    }}
+                  />
+                </div>
               ))}
             </div>
           </div>
