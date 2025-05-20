@@ -1,7 +1,7 @@
 const PropertyData = require('../models/propertyData');
 const PropertyImages = require('../models/propertyImage');
 const PropertyVideos = require('../models/propertyVideo');
-// const User = require('../models/user');
+const User = require('../models/user');
 const { PropertyDataFeature } = require('../models/propertyFeature');
 const PropertyCategory = require('../models/propertyCategory');
 const PropertyState = require('../models/state');
@@ -18,9 +18,9 @@ const propertyController = {
                 .populate('stateId')
                 .populate('cityId')
                 .populate('statusId')
-                .populate('userId');
+                .populate('userId', 'First_Name Last_Name'); 
+            console.log("Raw populated userId:", properties[0]?.userId);
 
-            // Get additional data for each property
             const enhancedProperties = await Promise.all(properties.map(async (property) => {
                 const propertyImages = await PropertyImages.find({ propertyId: property._id });
                 const propertyVideos = await PropertyVideos.find({ propertyId: property._id });
@@ -37,6 +37,7 @@ const propertyController = {
 
             res.json(enhancedProperties);
         } catch (error) {
+            console.error('Error fetching properties:', error);
             res.status(500).json({ message: error.message });
         }
     },
@@ -110,7 +111,7 @@ const propertyController = {
             if (!req.file) {
                 return res.status(400).json({ message: 'No image file provided' });
             }
-            res.json({ 
+            res.json({
                 success: true,
                 filename: req.file.filename,
                 path: `/uploads/${req.file.filename}`
@@ -129,7 +130,7 @@ const propertyController = {
                 filename: file.filename,
                 path: `/uploads/${file.filename}`
             }));
-            res.json({ 
+            res.json({
                 success: true,
                 files: uploadedFiles
             });
