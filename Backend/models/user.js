@@ -1,16 +1,7 @@
 const mongoose = require('mongoose');
 
-// Drop existing indexes when connecting
-mongoose.connection.once('open', async () => {
-    try {
-        // Drop all indexes
-        await mongoose.connection.db.collection('users').dropIndexes();
-    } catch (err) {
-        console.log('No indexes to drop');
-    }
-});
-
-const userSchema = new mongoose.Schema({
+// Check if the model exists before defining it
+const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema({
     First_Name: {
         type: String,
         required: true
@@ -83,9 +74,11 @@ const userSchema = new mongoose.Schema({
     resetTokenExpiration: Date
 }, {
     timestamps: true
-});
+}));
 
-// Create only the necessary indexes
-userSchema.index({ Email: 1 }, { unique: true });
+// Create index if it doesn't exist
+if (!User.schema.indexes().find(index => index[0].Email === 1)) {
+    User.schema.index({ Email: 1 }, { unique: true });
+}
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = User;
