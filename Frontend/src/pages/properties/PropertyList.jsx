@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import defaultPropertyImage from '../../assets/default-property.png'; // We'll create this
+import defaultPropertyImage from '../../assets/default-property'; // We'll create this
 
 const PropertyList = ({ status }) => {
   const [properties, setProperties] = useState([]);
@@ -32,20 +32,20 @@ const PropertyList = ({ status }) => {
         <Link 
           to={`/properties/${property._id}`} 
           key={property._id}
-          className="block hover:shadow-xl transition-shadow duration-300"
+          className="block hover:shadow-xl transition-all duration-300"
         >
-          <div className="border rounded-lg overflow-hidden">
+          <div className="border rounded-lg overflow-hidden hover:border-purple-300 transition-all duration-300 group">
             <img 
               src={property.image ? `http://localhost:3005/uploads/${property.image}` : defaultPropertyImage} 
               alt={property.name} 
-              className="w-full h-48 object-cover"
+              className="w-full h-48 object-cover group-hover:opacity-95 transition-all duration-300"
               onError={(e) => {
                 e.target.src = defaultPropertyImage;
                 e.target.onerror = null;
               }}
-            />
-            <div className="p-4">
-              <h3 className="text-xl font-semibold mb-2">{property.name}</h3>
+                />
+            <div className="p-4 group-hover:bg-purple-50 transition-all duration-300">
+              <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-800 transition-colors duration-300">{property.name}</h3>
               <p className="text-purple-800 font-bold">${property.price.toLocaleString()}</p>
               <div className="mt-2 text-gray-600">
                 <p>{property.beds} beds • {property.baths} baths</p>
