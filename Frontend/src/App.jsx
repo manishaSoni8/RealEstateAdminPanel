@@ -11,6 +11,7 @@ import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
 import Property from './pages/properties/Property';
 import SingleProperty from './pages/properties/SingleProperty';
+import SingleAdmin from './pages/admin/SingleAdmin';
 
 function LayoutWrapper() {
   const location = useLocation();
@@ -71,6 +72,14 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <AdminSignupForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/:id"
+              element={
+                <ProtectedRoute>
+                  <SingleAdmin />
                 </ProtectedRoute>
               }
             />
