@@ -15,6 +15,7 @@ import Property from './pages/properties/Property';
 import SingleProperty from './pages/properties/SingleProperty';
 import SingleAdmin from './pages/admin/SingleAdmin';
 import SingleAgent from './pages/admin/SingleAgent';
+import Dashboard from './pages/dashboard/Dashboard'
  
  
 function LayoutWrapper() {
@@ -53,6 +54,14 @@ function LayoutWrapper() {
                 <PublicRoute>
                   <ForgotPassword />
                 </PublicRoute>
+              }
+            />
+            <Route
+              path="/dashboard"
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
               }
             />
             <Route
