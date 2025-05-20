@@ -9,7 +9,9 @@ import ForgotPassword from './pages/admin/ForgotPassword';
 import ResetPassword from './pages/admin/ResetPassword';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
- 
+import Property from './pages/properties/Property';
+import SingleProperty from './pages/properties/SingleProperty';
+
 function LayoutWrapper() {
   const location = useLocation();
  
@@ -69,6 +71,22 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <AdminSignupForm />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/properties"
+              element={
+                <ProtectedRoute>
+                  <Property />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/properties/:id"
+              element={
+                <ProtectedRoute>
+                  <SingleProperty />
                 </ProtectedRoute>
               }
             />
