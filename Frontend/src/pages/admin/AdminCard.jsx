@@ -21,24 +21,45 @@ const AdminCard = () => {
     }
   };
 
+  // Add this function inside the AdminCard component
+  const handleDelete = async (adminId) => {
+    if (window.confirm('Are you sure you want to delete this admin?')) {
+      try {
+        const response = await fetch(`http://localhost:3005/admin/${adminId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`
+          }
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to delete admin');
+        }
+
+        // Refresh the admin list
+        fetchAdmins();
+      } catch (error) {
+        console.error('Error deleting admin:', error);
+        alert('Failed to delete admin');
+      }
+    }
+  };
+
+  // Update the delete button in your table
+
   return (
-    <div className="bg-white border rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:border-purple-300 group">
-      <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+    <div className="bg-white rounded-xl p-6 shadow-lg">
+      <div className="flex justify-between items-center mb-8">
         <h2 className="text-3xl font-bold text-purple-800">Admin Management</h2>
         <Link
           to="/admin/create"
-          className="bg-purple-800 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center gap-2 shadow-md"
+          className="bg-purple-800 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center gap-2"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
           </svg>
           Create Admin
         </Link>
-      </div>
-
-      <div className="mb-8 bg-purple-50 p-4 rounded-lg">
-        <h3 className="text-xl font-semibold mb-2 text-purple-900">Available Admins</h3>
-        <p className="text-purple-700">Total Admins: {admins.length}</p>
       </div>
 
       {loading ? (
@@ -53,7 +74,7 @@ const AdminCard = () => {
           <p className="text-gray-600 mb-6 text-lg">Get started by creating your first admin</p>
           <Link
             to="/admin/create"
-            className="inline-flex items-center gap-2 bg-purple-800 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 shadow-md"
+            className="inline-flex items-center gap-2 bg-purple-800 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-all duration-300"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
@@ -62,42 +83,68 @@ const AdminCard = () => {
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {admins.map((admin) => (
-            // In the admins.map section, update the admin card to be clickable
-            <Link
-              to={`/admin/${admin._id}`}
-              key={admin._id}
-              className="bg-white border rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:border-purple-300 group"
-            >
-              <div className="flex items-center space-x-4">
-                <img
-                  src={admin.user_image || `https://ui-avatars.com/api/?name=${admin.First_Name}+${admin.Last_Name}&background=8B5CF6&color=fff`}
-                  alt={`${admin.First_Name} ${admin.Last_Name}`}
-                  className="w-16 h-16 shrink-0 rounded-full object-cover border-2 border-purple-200 group-hover:border-purple-400 transition-colors duration-300"
-                />
-                <div className="flex-1 min-w-0"> {/* Added min-w-0 for text truncation */}
-                  <h4 className="text-lg font-semibold text-gray-800 group-hover:text-purple-800 transition-colors duration-300 truncate">
-                    {admin.First_Name} {admin.Last_Name}
-                  </h4>
-                  <p className="text-sm text-gray-600 truncate" title={admin.Email}>
-                    {admin.Email}
-                  </p>
-                  <p className="text-sm text-gray-500 truncate" title={admin.Phone}>
-                    {admin.Phone}
-                  </p>
-                </div>
-              </div>
-              <div className="mt-6 flex flex-wrap justify-center  items-center gap-3">
-                <button className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-800 font-medium transition-colors duration-300">
-                  View Details
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                  </svg>
-                </button>
-              </div>
-              </Link>
-          ))}
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Admin</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {admins.map((admin) => (
+                <tr key={admin._id} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center">
+                      <div className="h-10 w-10 flex-shrink-0">
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          src={admin.user_image || `https://ui-avatars.com/api/?name=${admin.First_Name}+${admin.Last_Name}&background=8B5CF6&color=fff`}
+                          alt=""
+                        />
+                      </div>
+                      <div className="ml-4">
+                        <div className="text-sm font-medium text-gray-900">
+                          {admin.First_Name} {admin.Last_Name}
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{admin.Email}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-900">{admin.Phone || 'N/A'}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    <div className="flex space-x-4">
+                      <Link to={`/admin/${admin._id}`} className="text-purple-600 hover:text-purple-900">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+                      </Link>
+                      <Link to={`/admin/edit/${admin._id}`} className="text-indigo-600 hover:text-indigo-900">
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                        </svg>
+                      </Link>
+                      <button
+                        onClick={() => handleDelete(admin._id)}
+                        className="text-red-600 hover:text-red-900"
+                      >
+                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                        </svg>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>

@@ -14,6 +14,8 @@ import AgentCard from './pages/admin/AgentCard';
 import Property from './pages/properties/Property';
 import SingleProperty from './pages/properties/SingleProperty';
 import SingleAdmin from './pages/admin/SingleAdmin';
+import Dashboard from './pages/dashboard/Dashboard';
+import EditAdmin from './pages/admin/EditAdmin';
  
  
 function LayoutWrapper() {
@@ -71,6 +73,14 @@ function LayoutWrapper() {
               }
             />
             <Route
+              path="/admin/:id"
+              element={
+                <ProtectedRoute>
+                  <SingleAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/admin/create"
               element={
                 <ProtectedRoute>
@@ -109,6 +119,22 @@ function LayoutWrapper() {
                   <SingleProperty />
                 </ProtectedRoute>
               }
+            />
+            <Route
+              path="/admin/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <EditAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route 
+              path="/dashboard" 
+              element={
+                <ProtectedRoute>
+                  <Dashboard />
+                </ProtectedRoute>
+              }  
             />
           </Routes>
         </main>
