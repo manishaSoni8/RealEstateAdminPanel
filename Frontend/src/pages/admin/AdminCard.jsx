@@ -25,8 +25,8 @@ const AdminCard = () => {
     <div className="bg-white border rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:border-purple-300 group">
       <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
         <h2 className="text-3xl font-bold text-purple-800">Admin Management</h2>
-        <Link 
-          to="/admin/create" 
+        <Link
+          to="/admin/create"
           className="bg-purple-800 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors duration-300 flex items-center gap-2 shadow-md"
         >
           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -35,7 +35,7 @@ const AdminCard = () => {
           Create Admin
         </Link>
       </div>
-      
+
       <div className="mb-8 bg-purple-50 p-4 rounded-lg">
         <h3 className="text-xl font-semibold mb-2 text-purple-900">Available Admins</h3>
         <p className="text-purple-700">Total Admins: {admins.length}</p>
@@ -51,7 +51,7 @@ const AdminCard = () => {
           <div className="text-7xl mb-6">👥</div>
           <h3 className="text-2xl font-semibold text-gray-800 mb-3">No Admins Available</h3>
           <p className="text-gray-600 mb-6 text-lg">Get started by creating your first admin</p>
-          <Link 
+          <Link
             to="/admin/create"
             className="inline-flex items-center gap-2 bg-purple-800 text-white px-8 py-3 rounded-lg hover:bg-purple-700 transition-all duration-300 transform hover:scale-105 shadow-md"
           >
@@ -64,9 +64,14 @@ const AdminCard = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {admins.map((admin) => (
-            <div key={admin._id} className="bg-white border rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:border-purple-300 group">
+            // In the admins.map section, update the admin card to be clickable
+            <Link
+              to={`/admin/${admin._id}`}
+              key={admin._id}
+              className="bg-white border rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:border-purple-300 group"
+            >
               <div className="flex items-center space-x-4">
-                <img 
+                <img
                   src={admin.user_image || `https://ui-avatars.com/api/?name=${admin.First_Name}+${admin.Last_Name}&background=8B5CF6&color=fff`}
                   alt={`${admin.First_Name} ${admin.Last_Name}`}
                   className="w-16 h-16 shrink-0 rounded-full object-cover border-2 border-purple-200 group-hover:border-purple-400 transition-colors duration-300"
@@ -91,7 +96,7 @@ const AdminCard = () => {
                   </svg>
                 </button>
               </div>
-            </div>
+              </Link>
           ))}
         </div>
       )}
