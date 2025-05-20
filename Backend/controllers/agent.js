@@ -21,7 +21,18 @@ exports.getAllAgents = async (req, res) => {
     res.status(500).json({ message: 'Error fetching agents' });
   }
 };
- 
+ exports.getAgentById= async (req, res) => {
+         try {
+            const agentType = await UserType.findOne({ user_type_name: 'agent' });
+             const agent = await User.findOne({ _id: req.params.id, user_type_id: agentType._id });
+             if (!agent) {
+                 return res.status(404).json({ message: 'Admin not found' });
+             }
+             res.json(agent);
+         } catch (error) {
+             res.status(500).json({ message: error.message });
+         }
+     };
 // Create new agent
 exports.createAgent = async (req, res) => {
   const { First_Name, Last_Name, Email, Password, Phone } = req.body;
@@ -62,44 +73,36 @@ exports.createAgent = async (req, res) => {
     res.status(500).json({ message: 'Failed to create agent' });
   }
 };
- 
-// Block or Unblock agent
-// Block or Unblock agent
+
 exports.blockAgent = async (req, res) => {
+  const { id } = req.params;
   try {
-    const agent = await User.findById(req.params.id);
+    const agent = await User.findById(id);
     if (!agent) return res.status(404).json({ message: 'Agent not found' });
  
     // Toggle status
-    agent.status = !agent.status;
- 
-    // Set isBlocked based on status
-    agent.is_blocked = !agent.status; 
- 
+    agent.is_blocked = !agent.is_blocked;
     await agent.save();
  
-    // Send email notification
-    const action = agent.status ? 'unblocked' : 'blocked';
-    const subject = `Your Agent Account has been ${action}`;
-    const message = `
-      <p>Hello ${agent.First_Name},</p>
-      <p>Your agent account has been <strong>${action}</strong> by the administrator.</p>
-      <p>If you have any questions, feel free to contact support.</p>
-      <p>Regards,<br>Real Estate Admin</p>
-    `;
+    const action = !agent.is_blocked ? 'unblocked' : 'Blocked';
  
+    // Send email to agent
+    
     await transporter.sendMail({
       to: agent.Email,
       from: 'balajipathak@startbitsolutions.com',
-      subject,
-      html: message,
+      subject:'Your Agent Account has been ${action}',
+      html:`
+      <p>Hello ${agent.First_Name},</p>
+      <p>Your agent account has been <strong>${action}</strong> by the administrator.</p>
+      <p>If you have any questions, feel free to contact support.</p>
+      <p>Regards,<br/>Real Estate Admin</p>
+    `
     });
  
-    res.json({ message: `Agent ${action} successfully`, agent });
+    res.status(200).json({ message: `Agent has been ${action}.` });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: 'Error updating agent status' });
+    console.error('Error in blockAgent:', err);
+    res.status(500).json({ message: 'Failed to update agent status' });
   }
 };
-
- 
