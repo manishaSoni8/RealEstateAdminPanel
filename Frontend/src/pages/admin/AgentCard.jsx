@@ -30,7 +30,24 @@ const AgentCard = () => {
         }
         setLoading(false);
     };
-
+const handleDelete = async (e, id) => {
+  e.preventDefault();
+  if (window.confirm('Are you sure you want to delete this agent?')) {
+    try {
+const response = await fetch(`http://localhost:3005/agents/${id}`, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      if (!response.ok) throw new Error('Failed to delete agent');
+      fetchAgents();
+    } catch (error) {
+      console.error('Error deleting agent:', error);
+      alert('Failed to delete agent');
+    }
+  }
+};
     const handleSearch = () => {
         const keyword = search.toLowerCase();
         const filtered = agents.filter(

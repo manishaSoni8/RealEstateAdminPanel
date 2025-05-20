@@ -91,7 +91,7 @@ exports.blockAgent = async (req, res) => {
     await transporter.sendMail({
       to: agent.Email,
       from: 'balajipathak@startbitsolutions.com',
-      subject:'Your Agent Account has been ${action}',
+      subject:'Agent Account Permissions',
       html:`
       <p>Hello ${agent.First_Name},</p>
       <p>Your agent account has been <strong>${action}</strong> by the administrator.</p>
@@ -104,5 +104,56 @@ exports.blockAgent = async (req, res) => {
   } catch (err) {
     console.error('Error in blockAgent:', err);
     res.status(500).json({ message: 'Failed to update agent status' });
+  }
+};
+
+exports.deleteAgent = async (req, res) => {
+  try {
+    const agentType = await UserType.findOne({ user_type_name: 'agent' });
+ 
+const agent = await User.findOne({ _id: req.params.id, user_type_id: agentType._id });
+    if (!agent) {
+      return res.status(404).json({ message: 'Agent not found' });
+    }
+ await transporter.sendMail({
+      to: agent.Email,
+      from: 'balajipathak@startbitsolutions.com',
+      subject:'Your Agent Account has been Deleted',
+      html:`
+      <p>Hello ${agent.First_Name},</p>
+      <p>Your agent account has been <strong>Deleted</strong> by the administrator.</p>
+      <p>If you have any questions, feel free to contact support.</p>
+      <p>Regards,<br/>Real Estate Admin</p>
+    `
+    });
+    await User.findByIdAndDelete(agent._id);
+    res.json({ message: 'Agent deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+  
+};
+
+exports.editAgent = async (req, res) => {
+  const { First_Name, Last_Name, Email, Phone } = req.body;
+ 
+  try {
+    const agent = await User.findByIdAndUpdate(req.params.id);
+    if (!agent) {
+      return res.status(404).json({ message: 'Agent not found' });
+    }
+ 
+    // Optional fields – only update if provided
+    if (First_Name) agent.First_Name = First_Name;
+    if (Last_Name) agent.Last_Name = Last_Name;
+    if (Email) agent.Email = Email;
+    if (Phone) agent.Phone = Phone;
+   
+    await agent.save();
+ 
+    res.status(200).json({ message: 'Agent updated successfully', agent });
+ 
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update agent', error: error.message });
   }
 };
