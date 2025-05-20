@@ -4,14 +4,17 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Admin from './pages/admin/Admin';
 import AdminSignupForm from './components/forms/AdminSignupForm';
+import AgentSignUpForm from './components/forms/AgentSignUpForm';
 import Login from './pages/admin/Login';
 import ForgotPassword from './pages/admin/ForgotPassword';
 import ResetPassword from './pages/admin/ResetPassword';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
+import AgentCard from './pages/admin/AgentCard';
 import Property from './pages/properties/Property';
 import SingleProperty from './pages/properties/SingleProperty';
 import SingleAdmin from './pages/admin/SingleAdmin';
+ 
  
 function LayoutWrapper() {
   const location = useLocation();
@@ -76,10 +79,18 @@ function LayoutWrapper() {
               }
             />
             <Route
-              path="/admin/:id"
+              path="/agent"
               element={
                 <ProtectedRoute>
-                  <SingleAdmin />
+                  <AgentCard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/agent/create"
+              element={
+                <ProtectedRoute>
+                  <AgentSignUpForm />
                 </ProtectedRoute>
               }
             />

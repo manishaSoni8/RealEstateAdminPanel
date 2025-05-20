@@ -1,7 +1,7 @@
 const PropertyData = require('../models/propertyData');
 const PropertyImages = require('../models/propertyImage');
 const PropertyVideos = require('../models/propertyVideo');
-const user = require('../models/user');
+const User = require('../models/User');
 const { PropertyDataFeature } = require('../models/propertyFeature');
 const PropertyCategory = require('../models/propertyCategory');
 const PropertyState = require('../models/state');
