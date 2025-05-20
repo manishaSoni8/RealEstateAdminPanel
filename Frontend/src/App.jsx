@@ -16,7 +16,8 @@ import SingleProperty from './pages/properties/SingleProperty';
 import SingleAdmin from './pages/admin/SingleAdmin';
 import SingleAgent from './pages/admin/SingleAgent';
 import Dashboard from './pages/dashboard/Dashboard'
- 
+import EditAgent from './pages/admin/EditAgent';
+ import EditAdmin from './pages/admin/EditAdmin';
  
 function LayoutWrapper() {
   const location = useLocation();
@@ -141,6 +142,30 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <SingleAgent />
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/agent/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <EditAgent />
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/admin/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <EditAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <EditAdmin />
                 </ProtectedRoute>
               }
             />
