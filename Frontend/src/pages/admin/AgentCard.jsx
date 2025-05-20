@@ -122,7 +122,7 @@ const res = await fetch(`http://localhost:3005/agents/block/${id}`, {
                   {agent.First_Name} {agent.Last_Name}
                 </h3>
                 <p>{agent.Email}</p>
-                <p>{agent.Contact}</p>
+                <p>{agent.Phone}</p>
                 <button
                   onClick={() => blockAgent(agent._id)}
                   className={`mt-3 px-3 py-1 rounded text-white transition-colors duration-200 ${

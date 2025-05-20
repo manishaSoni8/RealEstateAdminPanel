@@ -5,7 +5,7 @@ const PropertyCard = () => {
   const [activeTab, setActiveTab] = useState('available');
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-6">
+    <div className="bg-white border rounded-xl p-6 hover:shadow-xl transition-all duration-300 hover:border-purple-300 group">
       <div className="flex space-x-4 mb-6">
         <button
           className={`px-6 py-2 rounded-lg ${
