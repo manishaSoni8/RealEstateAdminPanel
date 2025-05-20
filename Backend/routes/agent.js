@@ -11,5 +11,5 @@ router.post('/agents/create', agentController.createAgent);
 router.patch('/agents/block/:id', agentController.blockAgent);
 router.put('/agents/edit/:id', agentController.editAgent);
 router.delete('/agents/:id', agentController.deleteAgent);
- 
+router.get('/agents/:id/properties', agentController.getPropertiesByAgent);
 module.exports = router;
