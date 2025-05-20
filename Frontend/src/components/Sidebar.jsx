@@ -9,7 +9,7 @@ const Sidebar = () => {
     { title: 'Dashboard', icon: '📊', path: '/dashboard' },
     { title: 'Properties', icon: '🏠', path: '/properties' },
     { title: 'Admin', icon: '👥', path: '/admin' },
-    { title: 'Agents', icon: '🧑', path: '/agents' },
+    { title: 'Agents', icon: '🧑', path: '/agent' },
     { title: 'Blogs', icon: '📝', path: '/blogs' },
     { title: 'Contact', icon: '📞', path: '/contact' },
     { title: 'Settings', icon: '⚙️', path: '/settings' },
