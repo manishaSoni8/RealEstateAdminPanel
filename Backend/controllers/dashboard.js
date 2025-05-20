@@ -54,16 +54,17 @@ exports.getTopSoldProperties = async (req, res) => {
     lastMonth.setMonth(lastMonth.getMonth() - 1);
 
     const topProperties = await Property.find({
-      saleStatus: 'sold',
-      updatedAt: { $gte: lastMonth }
+      saleStatus: 'sold'
     })
-    .sort({ price: -1 })
-    .limit(5)
     .populate('stateId', 'name')
-    .populate('cityId', 'name');
+    .populate('cityId', 'name')
+    .populate('categoryId', 'name')
+    .sort({ updatedAt: -1 })
+    .limit(5);
 
     res.json(topProperties);
-  } catch (err) {
+  } catch (error) {
+    console.error('Error fetching top sold properties:', error);
     res.status(500).json({ message: 'Error fetching top sold properties' });
   }
 };

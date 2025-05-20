@@ -24,26 +24,56 @@ const PropertyStateChart = ({ data }) => {
     labels: data.map(item => item.state),
     datasets: [
       {
-        label: 'Properties by State',
+        label: 'Number of Properties',
         data: data.map(item => item.count),
         backgroundColor: 'rgba(147, 51, 234, 0.5)',
         borderColor: 'rgb(147, 51, 234)',
         borderWidth: 1,
+        barThickness: 40, // Control bar width
+        maxBarThickness: 50, // Maximum bar width
       },
     ],
   };
 
   const options = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          font: {
+            size: 14
+          }
+        }
       },
       title: {
-        display: true,
-        text: 'Properties by State',
+        display: false
       },
     },
+    scales: {
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: 'rgba(0, 0, 0, 0.1)'
+        },
+        ticks: {
+          font: {
+            size: 12
+          }
+        }
+      },
+      x: {
+        grid: {
+          display: false
+        },
+        ticks: {
+          font: {
+            size: 12
+          }
+        }
+      }
+    }
   };
 
   return <Bar data={chartData} options={options} />;

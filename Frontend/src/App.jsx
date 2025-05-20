@@ -15,9 +15,11 @@ import Property from './pages/properties/Property';
 import SingleProperty from './pages/properties/SingleProperty';
 import SingleAdmin from './pages/admin/SingleAdmin';
 import SingleAgent from './pages/admin/SingleAgent';
-import Dashboard from './pages/dashboard/Dashboard'
-import EditAgent from './pages/admin/EditAgent';
- import EditAdmin from './pages/admin/EditAdmin';
+import EditAdmin from './pages/admin/EditAdmin'
+import Dashboard from './pages/dashboard/Dashboard';
+import Blog from './pages/blog/Blog';
+import SingleBlog from './pages/blog/SingleBlog';
+ 
  
 function LayoutWrapper() {
   const location = useLocation();
@@ -98,6 +100,14 @@ function LayoutWrapper() {
               }
             />
             <Route
+              path="admin/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <EditAdmin/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/agent"
               element={
                 <ProtectedRoute>
@@ -145,27 +155,19 @@ function LayoutWrapper() {
                 </ProtectedRoute>
               }
             />
-             <Route
-              path="/agent/edit/:id"
+            <Route
+              path="/blogs"
               element={
                 <ProtectedRoute>
-                  <EditAgent />
-                </ProtectedRoute>
-              }
-            />
-             <Route
-              path="/admin/edit/:id"
-              element={
-                <ProtectedRoute>
-                  <EditAdmin />
+                  <Blog />
                 </ProtectedRoute>
               }
             />
             <Route
-              path="/admin/edit/:id"
+              path="/blogs/:id"
               element={
                 <ProtectedRoute>
-                  <EditAdmin />
+                  <SingleBlog />
                 </ProtectedRoute>
               }
             />

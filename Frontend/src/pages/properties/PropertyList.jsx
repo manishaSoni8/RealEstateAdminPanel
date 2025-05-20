@@ -52,15 +52,15 @@ const PropertyList = ({ status, searchTerm, currentPage, propertiesPerPage, onPa
     <>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentProperties.map((property) => (
-          <Link 
-            to={`/properties/${property._id}`} 
+          <Link
+            to={`/properties/${property._id}`}
             key={property._id}
             className="block hover:shadow-xl transition-all duration-300"
           >
             <div className="border rounded-lg overflow-hidden hover:border-purple-300 transition-all duration-300 group">
-              <img 
-                src={property.image ? `http://localhost:3005/uploads/${property.image}` : defaultPropertyImage} 
-                alt={property.name} 
+              <img
+                src={property.image ? `http://localhost:3005/uploads/${property.image}` : defaultPropertyImage}
+                alt={property.name}
                 className="w-full h-48 object-cover group-hover:opacity-95 transition-all duration-300"
                 onError={(e) => {
                   e.target.src = defaultPropertyImage;
@@ -70,6 +70,8 @@ const PropertyList = ({ status, searchTerm, currentPage, propertiesPerPage, onPa
               <div className="p-4 group-hover:bg-purple-50 transition-all duration-300">
                 <h3 className="text-xl font-semibold mb-2 group-hover:text-purple-800 transition-colors duration-300">{property.name}</h3>
                 <p className="text-purple-800 font-bold">${property.price.toLocaleString()}</p>
+                <p className="text-purple-800 font-bold">
+                  Created By: {property.userId ? `${property.userId.First_Name} ${property.userId.Last_Name}` : 'Manisha Soni'}</p>
                 <div className="mt-2 text-gray-600">
                   <p>{property.beds} beds • {property.baths} baths</p>
                   <p>{property.area} sq ft</p>

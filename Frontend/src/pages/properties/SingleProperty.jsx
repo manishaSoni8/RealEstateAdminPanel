@@ -17,7 +17,7 @@ const SingleProperty = () => {
       const response = await fetch(`http://localhost:3005/properties/detail/${id}`);
       const data = await response.json();
       setProperty(data);
-      setSelectedImage(data.image); // Set main image as selected image
+      setSelectedImage(data.image);
       setLoading(false);
     } catch (error) {
       console.error('Error fetching property details:', error);
@@ -33,12 +33,19 @@ const SingleProperty = () => {
     return `http://localhost:3005/uploads/${imagePath}`;
   };
 
+  const getVideoUrl = (videoPath) => {
+    if (!videoPath) return null;
+    return `http://localhost:3005/uploads/${videoPath}`;
+  };
+
   return (
-    <div className="max-w-4xl mx-auto p-6">
+    <div className="max-w-5xl mx-auto p-6">
       <h1 className="text-3xl font-bold mb-6">{property.name}</h1>
+      
+      {/* Main top grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Left: Images */}
         <div>
-          {/* Main Image Display */}
           <div className="mb-4 relative">
             <img 
               src={getImageUrl(selectedImage || property.image)} 
@@ -51,11 +58,10 @@ const SingleProperty = () => {
             />
           </div>
           
-          {/* Updated Thumbnails Gallery */}
           <div className="mt-6">
             <h3 className="text-xl font-semibold mb-3">Gallery</h3>
             <div className="grid grid-cols-3 gap-2">
-              {/* Main property image thumbnail */}
+              {/* Main image thumbnail */}
               <div 
                 className={`relative rounded overflow-hidden cursor-pointer ${
                   selectedImage === property.image ? 'ring-2 ring-purple-600' : ''
@@ -73,7 +79,7 @@ const SingleProperty = () => {
                 />
               </div>
 
-              {/* Additional images thumbnails - limited to 2 more images */}
+              {/* Additional images thumbnails */}
               {property.additionalImages?.slice(0, 2).map((img, index) => (
                 <div 
                   key={index}
@@ -97,7 +103,7 @@ const SingleProperty = () => {
           </div>
         </div>
 
-        {/* Rest of your component remains the same */}
+        {/* Right: Main details */}
         <div className="space-y-6">
           <div className="bg-purple-50 p-6 rounded-lg">
             <p className="text-3xl font-bold text-purple-800">${property.price.toLocaleString()}</p>
@@ -137,6 +143,44 @@ const SingleProperty = () => {
               <p><span className="font-semibold">Status:</span> {property.statusId?.name}</p>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Features & Videos below the main grid on mobile and desktop */}
+      <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        {/* Features */}
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-xl font-semibold mb-3">Features</h3>
+          {property.features && property.features.length > 0 ? (
+            <ul className="list-disc list-inside space-y-1">
+              {property.features.map((feature) => (
+                <li key={feature._id}>{feature.name || feature.featureId?.name}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-gray-600">No features available.</p>
+          )}
+        </div>
+
+        {/* Videos */}
+        <div className="bg-white p-6 rounded-lg shadow">
+          <h3 className="text-xl font-semibold mb-3">Videos</h3>
+          {property.videos && property.videos.length > 0 ? (
+            <div className="space-y-4">
+              {property.videos.map((video, index) => (
+                <video
+                  key={index}
+                  controls
+                  className="w-full max-h-64 rounded-lg shadow"
+                  src={getVideoUrl(video.video || video.filename)}
+                >
+                  Sorry, your browser does not support embedded videos.
+                </video>
+              ))}
+            </div>
+          ) : (
+            <p className="text-gray-600">No videos available.</p>
+          )}
         </div>
       </div>
     </div>

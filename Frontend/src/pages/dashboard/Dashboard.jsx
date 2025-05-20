@@ -61,32 +61,71 @@ const Dashboard = () => {
 
       {/* State-wise Properties Chart */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
-        <PropertyStateChart data={stateData} />
+        <h2 className="text-xl font-semibold text-purple-800 mb-4">Properties by State Distribution</h2>
+        <div className="w-full h-[400px]">
+          <PropertyStateChart data={stateData} />
+        </div>
       </div>
 
       {/* Top 5 Properties List */}
       <div className="bg-white p-6 rounded-lg shadow-lg">
-        <h3 className="text-xl font-semibold text-purple-800 mb-4">Top 5 Properties Sold Last Month</h3>
-        <div className="space-y-4">
-          {topProperties.map((property) => (
-            <div key={property._id} className="border-b pb-4">
-              <div className="flex justify-between items-center">
-                <div>
-                  <h4 className="text-lg font-semibold">{property.name}</h4>
-                  <p className="text-gray-600">{property.location}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xl font-bold text-purple-800">
-                    ${property.price.toLocaleString()}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Sold on {new Date(property.soldDate).toLocaleDateString()}
-                  </p>
+        <h3 className="text-xl font-semibold text-purple-800 mb-4">Recently Sold Properties</h3>
+        {topProperties.length === 0 ? (
+          <p className="text-gray-500 text-center py-4">No sold properties found</p>
+        ) : (
+          <div className="space-y-4">
+            {topProperties.map((property) => (
+              <div key={property._id} className="border-b pb-4">
+                <div className="flex justify-between items-start">
+                  <div className="flex gap-4">
+                    <img 
+                      src={property.image ? `http://localhost:3005/uploads/${property.image}` : '/default-property.jpg'} 
+                      alt={property.name} 
+                      className="w-24 h-24 object-cover rounded-lg"
+                      onError={(e) => {
+                        e.target.src = '/default-property.jpg';
+                      }}
+                    />
+                    <div>
+                      <h4 className="text-lg font-semibold">{property.name}</h4>
+                      <p className="text-gray-600">
+                        {property.cityId?.name || 'N/A'}, {property.stateId?.name || 'N/A'}
+                      </p>
+                      {property.description && (
+                        <p className="mt-2 text-sm text-gray-500 line-clamp-2">
+                          {property.description}
+                        </p>
+                      )}
+                      <div className="mt-2 flex gap-4 text-sm text-gray-600">
+                        <span>{property.categoryId?.name || 'N/A'}</span>
+                        <span>•</span>
+                        <span>{property.beds} Beds</span>
+                        <span>•</span>
+                        <span>{property.baths} Baths</span>
+                        <span>•</span>
+                        <span>{property.area} m2</span>
+                      </div>
+                      <div className="mt-1">
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                          {property.saleStatus}
+                        </span>
+                      </div>
+                     
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xl font-bold text-purple-800">
+                      ${Number(property.price).toLocaleString()}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Contact: {property.phone}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
