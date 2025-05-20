@@ -27,14 +27,6 @@ const adminSchema = new mongoose.Schema({
         required: false,
         default: null
     },
-    is_verified: {
-        type: Boolean,
-        default: false
-    },
-    is_blocked: {
-        type: Boolean,
-        default: false
-    },
     resetToken: String,
     resetTokenExpiration: Date
 }, {

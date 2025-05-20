@@ -72,6 +72,14 @@ function LayoutWrapper() {
               }
             />
             <Route
+              path="/admin/:id"
+              element={
+                <ProtectedRoute>
+                  <SingleAdmin />
+                </ProtectedRoute>
+              }
+            />
+            <Route
               path="/admin/create"
               element={
                 <ProtectedRoute>
