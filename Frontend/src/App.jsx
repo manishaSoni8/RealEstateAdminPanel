@@ -25,12 +25,11 @@ import EditAgent from './pages/agents/EditAgent';
 import Contact from './pages/contact/Contact';
 import SingleContact from './pages/contact/SingleContact';
 import CreateBlogForm from './components/forms/CreateBlogForm';
-// import EditBlog from './pages/blog/EditBlog'
+import EditBlog from './pages/blog/EditBlog'
 // Add import
 import Customers from './pages/customers/Customers';
 // Add this import at the top 
 import SingleCustomer from './pages/customers/SingleCustomer';
-import EditBlog from './pages/blog/EditBlog';
 import CompanyInfo from './pages/settings/Settings';
 
 function LayoutWrapper() {
@@ -215,7 +214,8 @@ function LayoutWrapper() {
                 <ProtectedRoute>
                   <SingleContact/>
                   </ProtectedRoute>}/>
-                  <Route
+                
+            <Route
               path="/blogs/:id/edit"
               element={
                 <ProtectedRoute>
@@ -223,6 +223,7 @@ function LayoutWrapper() {
                 </ProtectedRoute>
               }
             />
+            // Add this route in your Routes component
             <Route
               path="/customers"
               element={
@@ -236,14 +237,13 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <SingleCustomer />
-                </ProtectedRoute>
-              }
-            />
+                 </ProtectedRoute>
+                  }/>
             <Route
               path="/settings"
               element={
                 <ProtectedRoute>
-                  <CompanyInfo/>
+                  <CompanyInfo />
                 </ProtectedRoute>
               }
             />

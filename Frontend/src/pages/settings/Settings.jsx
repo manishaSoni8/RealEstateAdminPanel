@@ -44,7 +44,7 @@ const res = await fetch(`http://localhost:3005/companyInfo/${info._id}`, {
     <div className="bg-white shadow-md rounded-xl p-6 max-w-4xl mx-auto">
       <h2 className="text-3xl font-bold text-purple-800 mb-6">Company Info</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="mb-6">
+        <div className="mb-1">
   <label className="block text-sm font-medium text-gray-700">Company Logo</label>
   {info.Logo && ( 
     <img
