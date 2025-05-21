@@ -30,7 +30,6 @@ import EditBlog from './pages/blog/EditBlog'
 import Customers from './pages/customers/Customers';
 // Add this import at the top 
 import SingleCustomer from './pages/customers/SingleCustomer';
-
 import CompanyInfo from './pages/settings/Settings';
 
 function LayoutWrapper() {
