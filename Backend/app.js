@@ -27,6 +27,7 @@ const propertyRoutes = require('./routes/propertyRoutes');
 const dashboardRoutes = require('./routes/dashboard');
 const blogRoutes = require('./routes/blog');
 const contactRoutes =require('./routes/contact');
+const compantinfoRoutes =require('./routes/settings');
 
 app.use('/admin', adminRoutes);
 app.use(adminloginRoutes);
@@ -35,6 +36,7 @@ app.use('/properties', propertyRoutes);
 app.use('/dashboard', dashboardRoutes); 
 app.use(blogRoutes);
 app.use(contactRoutes);
+app.use(compantinfoRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

@@ -24,7 +24,8 @@ import EditAgent from './pages/agents/EditAgent';
 import Contact from './pages/contact/Contact';
 import SingleContact from './pages/contact/SingleContact';
 import CreateBlogForm from './components/forms/CreateBlogForm';
-import EditBlog from './pages/blog/EditBlog'
+import EditBlog from './pages/blog/EditBlog';
+import CompanyInfo from './pages/settings/Settings';
 
 function LayoutWrapper() {
   const location = useLocation();
@@ -208,11 +209,19 @@ function LayoutWrapper() {
                 <ProtectedRoute>
                   <SingleContact/>
                   </ProtectedRoute>}/>
-                  <Route
+            <Route
               path="/blogs/:id/edit"
               element={
                 <ProtectedRoute>
                   <EditBlog />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <CompanyInfo />
                 </ProtectedRoute>
               }
             />
