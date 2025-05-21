@@ -27,7 +27,11 @@ const propertyRoutes = require('./routes/propertyRoutes');
 const dashboardRoutes = require('./routes/dashboard');
 const blogRoutes = require('./routes/blog');
 const contactRoutes =require('./routes/contact');
+// Add this line with other route imports
+const localUserRoutes = require('./routes/localUser');
 
+// Add this line with other route uses
+app.use(localUserRoutes);
 app.use('/admin', adminRoutes);
 app.use(adminloginRoutes);
 app.use(agentRoutes);

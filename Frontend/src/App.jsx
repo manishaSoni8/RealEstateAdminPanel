@@ -19,10 +19,17 @@ import EditAdmin from './pages/admin/EditAdmin'
 import Dashboard from './pages/dashboard/Dashboard';
 import Blog from './pages/blog/Blog';
 import SingleBlog from './pages/blog/SingleBlog';
+ 
 import EditAgent from './pages/agents/EditAgent';
 import Contact from './pages/contact/Contact';
 import SingleContact from './pages/contact/SingleContact';
- 
+import CreateBlogForm from './components/forms/CreateBlogForm';
+import EditBlog from './pages/blog/EditBlog'
+// Add import
+import Customers from './pages/customers/Customers';
+// Add this import at the top 
+import SingleCustomer from './pages/customers/SingleCustomer';
+
 function LayoutWrapper() {
   const location = useLocation();
  
@@ -173,7 +180,7 @@ function LayoutWrapper() {
                 </ProtectedRoute>
               }
             />
-            
+           
             <Route
               path="/blogs"
               element={
@@ -182,7 +189,7 @@ function LayoutWrapper() {
                 </ProtectedRoute>
               }
             />
-            
+           
             <Route
               path="/blogs/:id"
               element={
@@ -204,6 +211,29 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <SingleContact/>
+                  </ProtectedRoute>}/>
+                  <Route
+              path="/blogs/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <EditBlog />
+                </ProtectedRoute>
+              }
+            />
+            // Add this route in your Routes component
+            <Route
+              path="/customers"
+              element={
+                <ProtectedRoute>
+                  <Customers />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/customers/:id"
+              element={
+                <ProtectedRoute>
+                  <SingleCustomer />
                 </ProtectedRoute>
               }
             />

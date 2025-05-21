@@ -19,7 +19,6 @@ const propertyController = {
                 .populate('cityId')
                 .populate('statusId')
                 .populate('userId', 'First_Name Last_Name'); 
-            console.log("Raw populated userId:", properties[0]?.userId);
 
             const enhancedProperties = await Promise.all(properties.map(async (property) => {
                 const propertyImages = await PropertyImages.find({ propertyId: property._id });
