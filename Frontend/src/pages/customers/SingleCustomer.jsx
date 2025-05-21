@@ -49,8 +49,6 @@ const SingleCustomer = () => {
               <p><span className="font-semibold">First Name:</span> {customer.user.First_Name}</p>
               <p><span className="font-semibold">Last Name:</span> {customer.user.Last_Name}</p>
               <p><span className="font-semibold">Email:</span> {customer.user.Email}</p>
-              <p><span className="font-semibold">Phone:</span> {customer.user.Phone || 'N/A'}</p>
-              <p><span className="font-semibold">Address:</span> {customer.user.Address || 'N/A'}</p>
             </div>
           </div>
 
