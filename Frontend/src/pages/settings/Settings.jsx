@@ -89,7 +89,7 @@ const res = await fetch(`http://localhost:3005/companyInfo/${info._id}`, {
               value={formData[key] || ''}
               onChange={handleChange}
               disabled={!editMode}
-              className={`mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm ${
+              className={`mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:ring-purple-500 focus:border-purple-500 sm:text-sm ${
                 !editMode ? 'bg-purple-100 cursor-not-allowed' : ''
               }`}
             />
