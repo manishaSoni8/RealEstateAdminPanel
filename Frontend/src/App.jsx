@@ -10,15 +10,16 @@ import ForgotPassword from './pages/admin/ForgotPassword';
 import ResetPassword from './pages/admin/ResetPassword';
 import PublicRoute from './components/PublicRoute';
 import ProtectedRoute from './components/ProtectedRoute';
-import AgentCard from './pages/admin/AgentCard';
+import AgentCard from './pages/agents/AgentCard';
 import Property from './pages/properties/Property';
 import SingleProperty from './pages/properties/SingleProperty';
 import SingleAdmin from './pages/admin/SingleAdmin';
-import SingleAgent from './pages/admin/SingleAgent';
+import SingleAgent from './pages/agents/SingleAgent';
 import EditAdmin from './pages/admin/EditAdmin'
 import Dashboard from './pages/dashboard/Dashboard';
 import Blog from './pages/blog/Blog';
 import SingleBlog from './pages/blog/SingleBlog';
+import EditAgent from './pages/agents/EditAgent';
  
  
 function LayoutWrapper() {
@@ -104,6 +105,14 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <EditAdmin/>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="agent/edit/:id"
+              element={
+                <ProtectedRoute>
+                  <EditAgent/>
                 </ProtectedRoute>
               }
             />

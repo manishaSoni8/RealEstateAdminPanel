@@ -105,9 +105,9 @@ const response = await fetch(`http://localhost:3005/agents/${id}/properties`);
                 </p>
               </div>
               <div className="bg-purple-50 p-6 rounded-lg mt-6">
-          <h3 className="text-xl font-semibold mb-4">Properties Created by {agent.First_Name}</h3>
-          <p><strong>Total Properties:</strong> {properties.length}</p>
-          <ul className="list-disc pl-5 mt-2">
+          <h3 className="text-lg font-semibold text-purple-800">Properties Created by {agent.First_Name}</h3>
+          <p className="text-sm mt-2"><strong>Total Properties:</strong> {properties.length}</p>
+          <ul className="list-disc pl-5 mt-2 text-purple-800">
             {properties.map((prop) => (
               <li key={prop._id}>{prop.name}</li>
             ))}
