@@ -44,7 +44,7 @@ const SingleContact = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-purple-50 p-6 rounded-lg">
-            <h3 className="text-xl font-semibold mb-4">Personal Information</h3>
+            <h3 className="text-xl font-semibold mb-4 text-purple-800">Personal Information</h3>
             <div className="space-y-3">
               <p><span className="font-semibold">First Name:</span> {contact.First_Name}</p>
               <p><span className="font-semibold">Last Name:</span> {contact.Last_Name}</p>
@@ -54,25 +54,25 @@ const SingleContact = () => {
           </div>
 
           <div className="bg-purple-50 p-6 rounded-lg">
-            <h3 className="text-xl font-semibold mb-4">Role & Permissions</h3>
+            <h3 className="text-xl font-semibold mb-4 text-purple-800">Subject</h3>
             <div className="space-y-3">
             
-              <p><span className="font-semibold">Join Date:</span> {new Date(contact.createdAt).toLocaleDateString()}</p>
-              <p><span className="font-semibold">Last Updated:</span> {new Date(contact.updatedAt).toLocaleDateString()}</p>
+              
+              <p>{contact.Subject}</p>
             </div>
           </div>
 
-          <div className="bg-purple-50 p-6 rounded-lg md:col-span-2">
+         
 
               <div className="bg-purple-50 p-6 rounded-lg mt-6">
           <h3 className="text-lg font-semibold text-purple-800">Message </h3>
-          <p className="text-sm mt-2"><strong>Subject </strong> {contact.Subject}</p>
-           <p className="text-sm mt-2"><strong>Subject </strong> {contact.Message}</p>
-        </div>
+        
+           <p className="text-sm ">{contact.Message}</p>
+            </div>
             </div> 
           </div>
         </div>
-      </div>
+     
   
   );
 };

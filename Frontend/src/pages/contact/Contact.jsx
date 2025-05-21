@@ -71,7 +71,7 @@ const response = await fetch(`http://localhost:3005/contactforms/${id}`, {
     return (
         <div className="bg-white rounded-xl p-6 shadow-lg">
             
-
+<h2 className="text-3xl font-bold text-purple-800 mb-6">Messages</h2>
             <div className="mb-6">
                 <input
                     type="text"
