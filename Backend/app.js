@@ -27,13 +27,9 @@ const propertyRoutes = require('./routes/propertyRoutes');
 const dashboardRoutes = require('./routes/dashboard');
 const blogRoutes = require('./routes/blog');
 const contactRoutes =require('./routes/contact');
-<<<<<<< HEAD
 // Add this line with other route imports
 const localUserRoutes = require('./routes/localUser');
-=======
 const compantinfoRoutes =require('./routes/settings');
->>>>>>> c7d249b83e0e47e7c0bb097633d748439d21ed68
-
 // Add this line with other route uses
 app.use(localUserRoutes);
 app.use('/admin', adminRoutes);
