@@ -19,25 +19,19 @@ import EditAdmin from './pages/admin/EditAdmin'
 import Dashboard from './pages/dashboard/Dashboard';
 import Blog from './pages/blog/Blog';
 import SingleBlog from './pages/blog/SingleBlog';
-<<<<<<< HEAD
  
-=======
 
->>>>>>> c7d249b83e0e47e7c0bb097633d748439d21ed68
 import EditAgent from './pages/agents/EditAgent';
 import Contact from './pages/contact/Contact';
 import SingleContact from './pages/contact/SingleContact';
 import CreateBlogForm from './components/forms/CreateBlogForm';
-<<<<<<< HEAD
-import EditBlog from './pages/blog/EditBlog'
+// import EditBlog from './pages/blog/EditBlog'
 // Add import
 import Customers from './pages/customers/Customers';
 // Add this import at the top 
 import SingleCustomer from './pages/customers/SingleCustomer';
-=======
 import EditBlog from './pages/blog/EditBlog';
 import CompanyInfo from './pages/settings/Settings';
->>>>>>> c7d249b83e0e47e7c0bb097633d748439d21ed68
 
 function LayoutWrapper() {
   const location = useLocation();
@@ -221,11 +215,7 @@ function LayoutWrapper() {
                 <ProtectedRoute>
                   <SingleContact/>
                   </ProtectedRoute>}/>
-<<<<<<< HEAD
                   <Route
-=======
-            <Route
->>>>>>> c7d249b83e0e47e7c0bb097633d748439d21ed68
               path="/blogs/:id/edit"
               element={
                 <ProtectedRoute>
@@ -233,8 +223,6 @@ function LayoutWrapper() {
                 </ProtectedRoute>
               }
             />
-<<<<<<< HEAD
-            // Add this route in your Routes component
             <Route
               path="/customers"
               element={
@@ -248,13 +236,14 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <SingleCustomer />
-=======
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/settings"
               element={
                 <ProtectedRoute>
-                  <CompanyInfo />
->>>>>>> c7d249b83e0e47e7c0bb097633d748439d21ed68
+                  <CompanyInfo/>
                 </ProtectedRoute>
               }
             />

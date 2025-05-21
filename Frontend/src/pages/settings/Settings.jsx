@@ -46,11 +46,15 @@ const res = await fetch(`http://localhost:3005/companyInfo/${info._id}`, {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="mb-6">
   <label className="block text-sm font-medium text-gray-700">Company Logo</label>
-  {info.logo && (
+  {info.Logo && ( 
     <img
-src={info.logo}
+      src={`http://localhost:3005/uploads/${info.Logo}`} 
       alt="Company Logo"
-      className="h-24 w-auto my-2"
+      className="h-8 w-auto my-2 object-contain" 
+      onError={(e) => {
+        e.target.src = '/default-logo.png'; // Added fallback image
+        console.log('Error loading image:', info.Logo);
+      }}
     />
   )}
   {editMode && (
