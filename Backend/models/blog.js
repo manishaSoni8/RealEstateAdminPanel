@@ -5,6 +5,11 @@ const blogSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    adminId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'admin',
+        required: true
+    },
     Date: {
         type: Date,
         default: Date.now,

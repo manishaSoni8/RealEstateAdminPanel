@@ -19,8 +19,8 @@ import EditAdmin from './pages/admin/EditAdmin'
 import Dashboard from './pages/dashboard/Dashboard';
 import Blog from './pages/blog/Blog';
 import SingleBlog from './pages/blog/SingleBlog';
- 
- 
+import CreateBlogForm from './components/forms/CreateBlogForm';
+import EditBlog from './pages/blog/EditBlog'
 function LayoutWrapper() {
   const location = useLocation();
  
@@ -156,6 +156,15 @@ function LayoutWrapper() {
               }
             />
             <Route
+              path="/blogs/create"
+              element={
+                <ProtectedRoute>
+                  <CreateBlogForm />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route
               path="/blogs"
               element={
                 <ProtectedRoute>
@@ -163,11 +172,20 @@ function LayoutWrapper() {
                 </ProtectedRoute>
               }
             />
+            
             <Route
               path="/blogs/:id"
               element={
                 <ProtectedRoute>
                   <SingleBlog />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/blogs/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <EditBlog />
                 </ProtectedRoute>
               }
             />
