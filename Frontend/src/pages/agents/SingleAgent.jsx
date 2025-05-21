@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SingleAgent = () => {
   const { id } = useParams();
@@ -109,7 +110,9 @@ const response = await fetch(`http://localhost:3005/agents/${id}/properties`);
           <p className="text-sm mt-2"><strong>Total Properties:</strong> {properties.length}</p>
           <ul className="list-disc pl-5 mt-2 text-purple-800">
             {properties.map((prop) => (
+              <Link to={`/properties/${prop._id}`}>
               <li key={prop._id}>{prop.name}</li>
+              </Link>
             ))}
           </ul>
         </div>
