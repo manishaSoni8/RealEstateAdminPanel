@@ -20,7 +20,8 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Blog from './pages/blog/Blog';
 import SingleBlog from './pages/blog/SingleBlog';
 import EditAgent from './pages/agents/EditAgent';
- 
+import Contact from './pages/contact/Contact';
+import SingleContact from './pages/contact/SingleContact';
  
 function LayoutWrapper() {
   const location = useLocation();
@@ -177,6 +178,22 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <SingleBlog />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contact"
+              element={
+                <ProtectedRoute>
+                  <Contact />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/contact/:id"
+              element={
+                <ProtectedRoute>
+                  <SingleContact/>
                 </ProtectedRoute>
               }
             />

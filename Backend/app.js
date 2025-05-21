@@ -26,13 +26,15 @@ const agentRoutes =require('./routes/agent');
 const propertyRoutes = require('./routes/propertyRoutes');
 const dashboardRoutes = require('./routes/dashboard');
 const blogRoutes = require('./routes/blog');
+const contactRoutes =require('./routes/contact');
 
 app.use('/admin', adminRoutes);
 app.use(adminloginRoutes);
 app.use(agentRoutes);
 app.use('/properties', propertyRoutes);
-app.use('/dashboard', dashboardRoutes); // Changed from '/api' to '/dashboard'
-app.use(blogRoutes)
+app.use('/dashboard', dashboardRoutes); 
+app.use(blogRoutes);
+app.use(contactRoutes);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);
