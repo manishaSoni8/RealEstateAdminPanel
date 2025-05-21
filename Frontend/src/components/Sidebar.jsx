@@ -8,8 +8,8 @@ const Sidebar = () => {
   const menuItems = [
     { title: 'Dashboard', icon: '📊', path: '/dashboard' },
     { title: 'Properties', icon: '🏠', path: '/properties' },
-    { title: 'Admin', icon: '👥', path: '/admin' },
-    { title: 'Agents', icon: '🧑', path: '/agent' },
+    { title: 'Admin', icon: '👨‍💼', path: '/admin' },
+    { title: 'Agents', icon: '👥', path: '/agent' },
     { title: 'Blogs', icon: '📝', path: '/blogs' },
     { title: 'Contact', icon: '📞', path: '/contact' },
     { title: 'Settings', icon: '⚙️', path: '/settings' },
@@ -30,6 +30,7 @@ const Sidebar = () => {
       <div className="flex items-center justify-between p-4 border-b">
         <div className={`font-bold ${isCollapsed ? 'hidden' : 'block'}`}>
           Garo Estate
+          lore
         </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}

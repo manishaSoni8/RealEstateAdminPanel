@@ -166,6 +166,15 @@ function LayoutWrapper() {
               }
             />
             <Route
+              path="/blogs/create"
+              element={
+                <ProtectedRoute>
+                  <CreateBlogForm />
+                </ProtectedRoute>
+              }
+            />
+            
+            <Route
               path="/blogs"
               element={
                 <ProtectedRoute>
@@ -173,6 +182,7 @@ function LayoutWrapper() {
                 </ProtectedRoute>
               }
             />
+            
             <Route
               path="/blogs/:id"
               element={

@@ -15,8 +15,31 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+// Public routes
 router.get('/blogs', blogController.getAllBlogs);
-router.get('/blogs/:id', blogController.getBlogById); // ✅ FIXED name
+router.get('/blogs/:id', blogController.getBlogById);
 router.post('/blogs/comment', upload.single('Img'), blogController.addComment);
+
+// Protected routes - only for admins
+router.post(
+    '/blogs/create', 
+    blogController.verifyAdmin, 
+    upload.single('Img'), 
+    blogController.createBlog
+);
+
+router.delete(
+    '/blogs/:id', 
+    blogController.verifyAdmin, 
+    blogController.deleteBlog
+);
+
+// Add this new route before module.exports
+router.put(
+    '/blogs/:id',
+    blogController.verifyAdmin,
+    upload.single('Img'),
+    blogController.editBlog
+);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropertyStateChart from '../../components/charts/PropertyStateChart';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const [totalProperties, setTotalProperties] = useState(0);
@@ -75,12 +76,16 @@ const Dashboard = () => {
         ) : (
           <div className="space-y-4">
             {topProperties.map((property) => (
-              <div key={property._id} className="border-b pb-4">
+              <Link
+                to={`/properties/${property._id}`}
+                key={property._id}
+                className="block hover:shadow-xl transition-all duration-300"
+              >
                 <div className="flex justify-between items-start">
                   <div className="flex gap-4">
-                    <img 
-                      src={property.image ? `http://localhost:3005/uploads/${property.image}` : '/default-property.jpg'} 
-                      alt={property.name} 
+                    <img
+                      src={property.image ? `http://localhost:3005/uploads/${property.image}` : '/default-property.jpg'}
+                      alt={property.name}
                       className="w-24 h-24 object-cover rounded-lg"
                       onError={(e) => {
                         e.target.src = '/default-property.jpg';
@@ -110,7 +115,7 @@ const Dashboard = () => {
                           {property.saleStatus}
                         </span>
                       </div>
-                     
+
                     </div>
                   </div>
                   <div className="text-right">
@@ -122,7 +127,7 @@ const Dashboard = () => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         )}

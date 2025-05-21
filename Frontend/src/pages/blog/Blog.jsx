@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import BlogCard from './BlogCard';
 import Pagination from '../../components/Pagination';
+import { Link } from 'react-router-dom';
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
@@ -61,14 +62,22 @@ const Blog = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-3xl font-bold text-purple-800">Blog Posts</h1>
-        <div className="w-1/3">
-          <input
-            type="text"
-            placeholder="Search blogs..."
-            className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
+        <div className="flex items-center space-x-4">
+          <Link
+            to="/blogs/create"
+            className="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors"
+          >
+            Create Blog
+          </Link>
+          <div className="w-64">
+            <input
+              type="text"
+              placeholder="Search blogs..."
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
         </div>
       </div>
 
