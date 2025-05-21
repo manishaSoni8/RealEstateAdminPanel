@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom';
 const SingleAgent = () => {
   const { id } = useParams();
   const [agent, setAgent] = useState(null);
+  const [properties, setProperties] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchAdminDetails();
+    fetchAgentProperties();
   }, [id]);
 
   const fetchAdminDetails = async () => {
@@ -18,6 +20,17 @@ const SingleAgent = () => {
       setLoading(false);
     } catch (error) {
       console.error('Error fetching agent details:', error);
+      setLoading(false);
+    }
+  };
+  const fetchAgentProperties = async () => {
+    try {
+const response = await fetch(`http://localhost:3005/agents/${id}/properties`);
+      const data = await response.json();
+      setProperties(data);
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching agent properties:', error);
       setLoading(false);
     }
   };
@@ -91,6 +104,15 @@ const SingleAgent = () => {
                   })}
                 </p>
               </div>
+              <div className="bg-purple-50 p-6 rounded-lg mt-6">
+          <h3 className="text-lg font-semibold text-purple-800">Properties Created by {agent.First_Name}</h3>
+          <p className="text-sm mt-2"><strong>Total Properties:</strong> {properties.length}</p>
+          <ul className="list-disc pl-5 mt-2 text-purple-800">
+            {properties.map((prop) => (
+              <li key={prop._id}>{prop.name}</li>
+            ))}
+          </ul>
+        </div>
             </div>
           </div>
         </div>

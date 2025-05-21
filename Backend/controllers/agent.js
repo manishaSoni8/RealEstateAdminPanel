@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const UserType = require('../models/UserType');
+const PropertyData = require('../models/propertyData');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const sendgridTransport = require('nodemailer-sendgrid-transport');
@@ -155,5 +156,14 @@ exports.editAgent = async (req, res) => {
  
   } catch (error) {
     res.status(500).json({ message: 'Failed to update agent', error: error.message });
+  }
+};
+exports.getPropertiesByAgent = async (req, res) => {
+  try {
+const properties = await PropertyData.find({ userId: req.params.id });
+    res.status(200).json(properties);
+  } catch (error) {
+    console.error('Error fetching properties by agent:', error);
+    res.status(500).json({ message: 'Failed to fetch agent properties' });
   }
 };
