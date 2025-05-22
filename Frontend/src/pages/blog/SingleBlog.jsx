@@ -81,8 +81,8 @@ const SingleBlog = () => {
         <div className="flex justify-between items-center mb-4">
           <h1 className="text-4xl font-bold text-purple-800">{blog.Title}</h1>
           
-          {/* Add admin controls */}
-          {currentAdmin && currentAdmin.id === blog.adminId && (
+          {/* Show admin controls for any admin */}
+          {currentAdmin && (
             <div className="flex gap-4">
               <button
                 onClick={() => navigate(`/blogs/${id}/edit`)}

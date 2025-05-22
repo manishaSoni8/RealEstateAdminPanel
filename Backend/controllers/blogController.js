@@ -34,7 +34,6 @@ exports.getAllBlogs = async (req, res) => {
     }
 };
 
-// ✅ FIXED: Renamed to match route
 exports.getBlogById = async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id);
@@ -80,23 +79,14 @@ exports.addComment = async (req, res) => {
     }
 };
 
-// Add delete blog functionality with admin verification
+// Update deleteBlog function - remove admin verification
 exports.deleteBlog = async (req, res) => {
     try {
         const blogId = req.params.id;
-        const adminId = req.admin._id; // Get current admin's ID
-
-        const blog = await Blog.findById(blogId);
         
+        const blog = await Blog.findById(blogId);
         if (!blog) {
             return res.status(404).json({ message: 'Blog not found' });
-        }
-
-        // Check if the current admin is the creator of the blog
-        if (blog.adminId.toString() !== adminId.toString()) {
-            return res.status(403).json({ 
-                message: 'Unauthorized: You can only delete your own blogs' 
-            });
         }
 
         // Delete associated comments first
@@ -111,37 +101,59 @@ exports.deleteBlog = async (req, res) => {
     }
 };
 
-// Add admin verification middleware
-// Update the verifyAdmin middleware
-exports.verifyAdmin = async (req, res, next) => {
+// Update editBlog function - remove admin verification
+exports.editBlog = async (req, res) => {
     try {
-        // Get token from Authorization header
+        const blogId = req.params.id;
+        const { Auther, Title, Description } = req.body;
+        const Img = req.file ? req.file.filename : undefined;
+
+        const blog = await Blog.findById(blogId);
+        if (!blog) {
+            return res.status(404).json({ message: 'Blog not found' });
+        }
+        const updateData = {
+            Auther,
+            Title,
+            Description,
+            ...(Img && { Img })
+        };
+
+        const updatedBlog = await Blog.findByIdAndUpdate(
+            blogId,
+            updateData,
+            { new: true }
+        );
+
+        res.json(updatedBlog);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.verifyToken = async (req, res, next) => {
+    try {
         const token = req.headers.authorization?.split(' ')[1];
         
         if (!token) {
             return res.status(401).json({ message: 'No token provided' });
         }
 
-        // Verify token
-        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-jwt-secret',);
-        
-        // Add admin data to request object from decoded token
-        req.admin = {
-            _id: decoded.adminId,
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-jwt-secret');
+        req.user = {
+            adminId: decoded.adminId,
             email: decoded.email
-        };
-
+        }; // Match the token structure
         next();
     } catch (error) {
         res.status(401).json({ message: 'Invalid or expired token' });
     }
 };
 
-// Update createBlog to use token data
+// Update createBlog to remove admin-specific logic
 exports.createBlog = async (req, res) => {
     try {
         const { Auther, Title, Description } = req.body;
-        const adminId = req.admin._id; // Now using the ID from verified token
         const Img = req.file ? req.file.filename : null;
 
         if (!Auther || !Title || !Description || !Img) {
@@ -153,53 +165,14 @@ exports.createBlog = async (req, res) => {
             Title,
             Description,
             Img,
-            adminId,
+            adminId: req.user.adminId, // Add adminId from decoded token
             Date: new Date()
         });
 
         const savedBlog = await newBlog.save();
         res.status(201).json(savedBlog);
     } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};
-
-// Edit blog with admin verification
-exports.editBlog = async (req, res) => {
-    try {
-        const blogId = req.params.id;
-        const adminId = req.admin._id;
-        const { Auther, Title, Description } = req.body;
-        const Img = req.file ? req.file.filename : undefined;
-
-        const blog = await Blog.findById(blogId);
-        
-        if (!blog) {
-            return res.status(404).json({ message: 'Blog not found' });
-        }
-
-        // Verify if the admin owns this blog
-        if (blog.adminId.toString() !== adminId.toString()) {
-            return res.status(403).json({ 
-                message: 'Unauthorized: You can only edit your own blogs' 
-            });
-        }
-
-        const updateData = {
-            Auther,
-            Title,
-            Description,
-            ...(Img && { Img }) // Only update image if new one is provided
-        };
-
-        const updatedBlog = await Blog.findByIdAndUpdate(
-            blogId,
-            updateData,
-            { new: true }
-        );
-
-        res.json(updatedBlog);
-    } catch (error) {
+        console.error('Blog creation error:', error);
         res.status(500).json({ message: error.message });
     }
 };
