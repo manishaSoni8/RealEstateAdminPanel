@@ -79,7 +79,8 @@ const res = await fetch(`https://realestateadminpanel-2.onrender.com/companyInfo
           { label: 'City_registered', key: 'City_registered' },
           { label: 'DEALER_BRANCHES', key: 'DEALER_BRANCHES' },
           { label: 'geo_latituse', key: 'geo_latituse' },
-          { label: 'geo_longitude', key: 'geo_longitude' }
+          { label: 'geo_longitude', key: 'geo_longitude' },
+          { label: 'AccountNo', key: 'AccountNo'}
         ].map(({ label, key }) => (
           <div key={key}>
             <label className="block text-sm font-medium text-gray-700">{label}</label>
