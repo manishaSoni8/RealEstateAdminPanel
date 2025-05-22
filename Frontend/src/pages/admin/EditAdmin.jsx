@@ -19,7 +19,7 @@ const EditAdmin = () => {
 
   const fetchAdminData = async () => {
     try {
-      const response = await fetch(`http://localhost:3005/admin/${id}`);
+      const response = await fetch(`https://realestateadminpanel-2.onrender.com/admin/${id}`);
       const data = await response.json();
       setFormData({
         First_Name: data.First_Name,
@@ -44,7 +44,7 @@ const EditAdmin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:3005/admin/${id}`, {
+      const response = await fetch(`https://realestateadminpanel-2.onrender.com/admin/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

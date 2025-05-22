@@ -15,7 +15,7 @@ const SingleAgent = () => {
 
   const fetchAdminDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:3005/agents/${id}`);
+      const response = await fetch(`https://realestateadminpanel-2.onrender.com/agents/${id}`);
       const data = await response.json();
       setAgent(data);
       setLoading(false);
@@ -26,7 +26,7 @@ const SingleAgent = () => {
   };
   const fetchAgentProperties = async () => {
     try {
-const response = await fetch(`http://localhost:3005/agents/${id}/properties`);
+const response = await fetch(`https://realestateadminpanel-2.onrender.com/agents/${id}/properties`);
       const data = await response.json();
       setProperties(data);
       setLoading(false);

@@ -14,7 +14,7 @@ const SingleContact = () => {
 
   const fetchAdminDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:3005/contactforms/${id}`);
+      const response = await fetch(`https://realestateadminpanel-2.onrender.com/contactforms/${id}`);
       const data = await response.json();
       setContact(data);
       setLoading(false);

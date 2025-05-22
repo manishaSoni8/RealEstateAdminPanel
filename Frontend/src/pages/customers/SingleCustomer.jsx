@@ -12,7 +12,7 @@ const SingleCustomer = () => {
 
   const fetchCustomerDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:3005/customers/${id}`);
+      const response = await fetch(`https://realestateadminpanel-2.onrender.com/customers/${id}`);
       const data = await response.json();
       setCustomer(data);
       setLoading(false);

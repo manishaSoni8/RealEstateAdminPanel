@@ -87,7 +87,7 @@ const CreateBlogForm = () => {
   
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3005/blogs/create', {
+        const response = await fetch('https://realestateadminpanel-2.onrender.com/blogs/create', {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`

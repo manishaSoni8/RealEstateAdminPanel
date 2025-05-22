@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-
 export default defineConfig({
   plugins: [react()],
   server: {
@@ -14,7 +13,7 @@ export default defineConfig({
     cors: true
   },
   define: {
-    'process.env.Base_URL': JSON.stringify('https://realestateadminpanel-2.onrender.com')
+    'process.env.BASE_URL': JSON.stringify('https://realestateadminpanel-2.onrender.com')
   },
   preview: {
     port: 3005,
@@ -26,3 +25,4 @@ export default defineConfig({
     ]
   }
 })
+ 

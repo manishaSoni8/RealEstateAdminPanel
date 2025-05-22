@@ -73,7 +73,7 @@ const AdminSignupForm = () => {
     e.preventDefault();
     if (validateForm()) {
       try {
-        const response = await fetch('http://localhost:3005/admin/create', {
+        const response = await fetch(`https://realestateadminpanel-2.onrender.com/admin/create`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

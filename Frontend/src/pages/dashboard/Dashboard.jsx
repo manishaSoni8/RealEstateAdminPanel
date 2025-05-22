@@ -16,22 +16,22 @@ const Dashboard = () => {
   const fetchDashboardData = async () => {
     try {
       // Fetch total properties
-      const propertiesRes = await fetch('http://localhost:3005/dashboard/stats/total');
+      const propertiesRes = await fetch('https://realestateadminpanel-2.onrender.com/dashboard/stats/total');
       const propertiesData = await propertiesRes.json();
       setTotalProperties(propertiesData.total);
 
       // Fetch state-wise properties
-      const stateRes = await fetch('http://localhost:3005/dashboard/stats/by-state');
+      const stateRes = await fetch('https://realestateadminpanel-2.onrender.com/dashboard/stats/by-state');
       const stateData = await stateRes.json();
       setStateData(stateData);
 
       // Fetch top 5 sold properties
-      const topRes = await fetch('http://localhost:3005/dashboard/stats/top-sold');
+      const topRes = await fetch('https://realestateadminpanel-2.onrender.com/dashboard/stats/top-sold');
       const topData = await topRes.json();
       setTopProperties(topData);
 
       // Fetch total sales
-      const salesRes = await fetch('http://localhost:3005/dashboard/stats/total-sales');
+      const salesRes = await fetch('https://realestateadminpanel-2.onrender.com/dashboard/stats/total-sales');
       const salesData = await salesRes.json();
       setTotalSales(salesData.total);
 
@@ -84,7 +84,7 @@ const Dashboard = () => {
                 <div className="flex justify-between items-start">
                   <div className="flex gap-4">
                     <img
-                      src={property.image ? `http://localhost:3005/uploads/${property.image}` : '/default-property.jpg'}
+                      src={property.image ? `https://realestateadminpanel-2.onrender.com/uploads/${property.image}` : '/default-property.jpg'}
                       alt={property.name}
                       className="w-24 h-24 object-cover rounded-lg"
                       onError={(e) => {

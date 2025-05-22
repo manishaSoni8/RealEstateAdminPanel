@@ -14,7 +14,7 @@ const SingleProperty = () => {
 
   const fetchPropertyDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:3005/properties/detail/${id}`);
+      const response = await fetch(`https://realestateadminpanel-2.onrender.com/properties/detail/${id}`);
       const data = await response.json();
       setProperty(data);
       setSelectedImage(data.image);
@@ -30,12 +30,12 @@ const SingleProperty = () => {
 
   const getImageUrl = (imagePath) => {
     if (!imagePath) return defaultPropertyImage;
-    return `http://localhost:3005/uploads/${imagePath}`;
+    return `https://realestateadminpanel-2.onrender.com/uploads/${imagePath}`;
   };
 
   const getVideoUrl = (videoPath) => {
     if (!videoPath) return null;
-    return `http://localhost:3005/uploads/${videoPath}`;
+    return `https://realestateadminpanel-2.onrender.com/uploads/${videoPath}`;
   };
 
   return (
