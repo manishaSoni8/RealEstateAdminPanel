@@ -1,7 +1,28 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-// https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    host: true,
+    strictPort: true,
+    port: 3005,
+    allowedHosts: [
+      'realestateadminpanel-3.onrender.com',
+      'realestateadminpanel-2.onrender.com'
+    ],
+    cors: true
+  },
+  define: {
+    'process.env.Base_URL': JSON.stringify('https://realestateadminpanel-2.onrender.com')
+  },
+  preview: {
+    port: 3005,
+    host: true,
+    strictPort: true,
+    allowedHosts: [
+      'realestateadminpanel-3.onrender.com',
+      'realestateadminpanel-2.onrender.com'
+    ]
+  }
 })

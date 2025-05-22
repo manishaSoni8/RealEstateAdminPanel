@@ -23,7 +23,7 @@ const getEmailTemplate = (adminName, email, password) => {
                 <p><strong>Password:</strong> ${password}</p>
             </div>
             <div style="text-align: center; margin: 30px 0;">
-                <a href="http://localhost:5173/admin-login" 
+                <a href="https://realestateadminpanel-3.onrender.com/admin-login"  
                    style="background-color: #4CAF50; color: white; padding: 14px 28px; 
                           text-decoration: none; border-radius: 5px;">
                     Login to Admin Panel
