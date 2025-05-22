@@ -13,7 +13,7 @@ const ResetPassword = () => {
   useEffect(() => {
     const validateToken = async () => {
       try {
-const res = await fetch(`http://localhost:3005/admin-reset/${token}`);
+const res = await fetch(`https://realestateadminpanel-2.onrender.com/admin-reset/${token}`);
         const data = await res.json();
         if (res.ok) {
 setEmail(data.email);
@@ -33,7 +33,7 @@ setEmail(data.email);
     setError('');
     setMessage('');
     try {
-const res = await fetch('http://localhost:3005/admin-new-password', {
+const res = await fetch('https://realestateadminpanel-2.onrender.com/admin-new-password', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

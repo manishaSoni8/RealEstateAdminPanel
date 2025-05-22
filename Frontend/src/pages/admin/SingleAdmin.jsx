@@ -12,7 +12,7 @@ const SingleAdmin = () => {
 
   const fetchAdminDetails = async () => {
     try {
-      const response = await fetch(`http://localhost:3005/admin/${id}`);
+      const response = await fetch(`https://realestateadminpanel-2.onrender.com/admin/${id}`);
       const data = await response.json();
       setAdmin(data);
       setLoading(false);

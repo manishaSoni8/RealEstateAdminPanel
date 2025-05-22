@@ -12,7 +12,7 @@ const Login = () => {
     setError('');
 
     try {
-      const response = await fetch('http://localhost:3005/admin-login', {
+      const response = await fetch('https://realestateadminpanel-2.onrender.com/admin-login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

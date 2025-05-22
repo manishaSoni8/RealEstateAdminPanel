@@ -20,7 +20,7 @@ const CustomerList = () => {
 
   const fetchCustomers = async () => {
     try {
-      const response = await fetch('http://localhost:3005/customers');
+      const response = await fetch('https://realestateadminpanel-2.onrender.com/customers');
       const data = await response.json();
       setCustomers(data);
       setFilteredCustomers(data);

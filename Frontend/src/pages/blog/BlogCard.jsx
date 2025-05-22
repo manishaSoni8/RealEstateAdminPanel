@@ -6,7 +6,7 @@ const BlogCard = ({ blog }) => {
     <div className="bg-white rounded-lg shadow-lg overflow-hidden h-full flex flex-col">
       <div className="relative pt-[60%]"> {/* 60% aspect ratio container */}
         <img
-          src={`http://localhost:3005/uploads/${blog.Img}`}
+          src={`https://realestateadminpanel-2.onrender.com/uploads/${blog.Img}`}
           alt={blog.Title}
           className="absolute top-0 left-0 w-full h-full object-cover"
           onError={(e) => {

@@ -83,7 +83,7 @@ const BlogCommentForm = ({ blogId, onCommentAdded }) => {
       }
 
       try {
-        const response = await fetch('http://localhost:3005/blogs/comment', {
+        const response = await fetch('https://realestateadminpanel-2.onrender.com/blogs/comment', {
           method: 'POST',
           body: formDataToSend,
         });

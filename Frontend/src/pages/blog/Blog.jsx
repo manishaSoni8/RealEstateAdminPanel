@@ -21,7 +21,7 @@ const Blog = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch('http://localhost:3005/blogs'); // fetch all blogs at once
+      const response = await fetch('https://realestateadminpanel-2.onrender.com/blogs'); // fetch all blogs at once
       const data = await response.json();
       setBlogs(data.blogs || data); // adapt to your API response shape
       setFilteredBlogs(data.blogs || data);
