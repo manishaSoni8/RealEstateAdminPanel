@@ -95,7 +95,7 @@ exports.postAdminReset = async (req, res) => {
                 subject: 'Password Reset',
                 html: `
                     <p>You requested a password reset</p>
-                    <p>Click this <a href="${process.env.CLIENT_BASE_URL || 'https://realestateadminpanel-2.onrender.com'}/admin-reset/${token}">link</a> to set a new password.</p>
+                    <p>Click this <a href="${process.env.CLIENT_BASE_URL || 'https://realestateadminpanel-3.onrender.com'}/admin-reset/${token}">link</a> to set a new password.</p>
                 `
             });
  
