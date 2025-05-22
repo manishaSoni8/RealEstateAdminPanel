@@ -4,8 +4,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: true,
-    strictPort: true,
-    port: 3005,
+    strictPort: false,
+    port: 5173,
     allowedHosts: [
       'realestateadminpanel-3.onrender.com',
       'realestateadminpanel-2.onrender.com'
@@ -13,7 +13,7 @@ export default defineConfig({
     cors: true
   },
   define: {
-    'process.env.BASE_URL': JSON.stringify('https://realestateadminpanel-2.onrender.com')
+    'process.env.VITE_BASE_URL': JSON.stringify('https://realestateadminpanel-2.onrender.com')
   },
   preview: {
     port: 3005,
@@ -25,4 +25,3 @@ export default defineConfig({
     ]
   }
 })
- 
