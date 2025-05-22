@@ -1,5 +1,5 @@
 const User = require('../models/user');
-const UserType = require('../models/UserType');
+const UserType = require('../models/userType');
 const UserPurchaseProperty = require('../models/userPurchaseProperty');
 
 exports.getAllLocalUsers = async (req, res) => {
