@@ -9,7 +9,7 @@ export default defineConfig({
     port: 3005
   },
   define: {
-    'process.env.Base_URL': JSON.stringify('https://realestateadminpanel-2.onrender.com')
+    'process.env.BASE_URL': JSON.stringify('https://realestateadminpanel-2.onrender.com')
   }
 })
  
