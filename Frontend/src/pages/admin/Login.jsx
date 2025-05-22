@@ -26,7 +26,7 @@ const Login = () => {
         console.log(result);
         localStorage.setItem('token', result.token); 
         localStorage.setItem('user', JSON.stringify(result.admin)); 
-        navigate('/admin'); 
+        navigate('/dashboard'); 
       } else {
         setError(result.message || 'Login failed');
       }
