@@ -6,10 +6,24 @@ export default defineConfig({
   server: {
     host: true,
     strictPort: true,
-    port: 3005
+    port: 3005,
+    allowedHosts: [
+      'realestateadminpanel-3.onrender.com',
+      'realestateadminpanel-2.onrender.com'
+    ],
+    cors: true
   },
   define: {
     'process.env.BASE_URL': JSON.stringify('https://realestateadminpanel-2.onrender.com')
+  },
+  preview: {
+    port: 3005,
+    host: true,
+    strictPort: true,
+    allowedHosts: [
+      'realestateadminpanel-3.onrender.com',
+      'realestateadminpanel-2.onrender.com'
+    ]
   }
 })
  
