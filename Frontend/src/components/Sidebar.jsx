@@ -10,9 +10,10 @@ const Sidebar = () => {
     { title: 'Properties', icon: '🏠', path: '/properties' },
     { title: 'Admin', icon: '👨‍💼', path: '/admin' },
     { title: 'Agents', icon: '👥', path: '/agent' },
-    { title: 'Customers', icon: '👤', path: '/customers' }, // Add this line
+    { title: 'Customers', icon: '👤', path: '/customers' }, 
     { title: 'Blogs', icon: '📝', path: '/blogs' },
     { title: 'Contact', icon: '📞', path: '/contact' },
+   { title: 'Accounts', icon: '📖', path: '/accounts' },
     { title: 'Settings', icon: '⚙️', path: '/settings' },
   ];
 
@@ -37,7 +38,7 @@ const Sidebar = () => {
           onClick={() => setIsCollapsed(!isCollapsed)}
           className="p-2 rounded-lg hover:bg-purple-400  bg-purple-800 transition-colors"
         >
-          <div className="flex flex-col space-y-1 hover:bg-purple-200 ">
+          <div className="flex flex-col space-y-1 hover:bg-purple-400 ">
             <span className="w-4 h-0.5 bg-gray-100"></span>
             <span className="w-4 h-0.5 bg-gray-100"></span>
             <span className="w-4 h-0.5 bg-gray-100"></span>
