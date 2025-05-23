@@ -7,7 +7,7 @@ const CompanyInfo = () => {
   const [formData, setFormData] = useState({});
  const [logoFile, setLogoFile] = useState(null);
   useEffect(() => {
-fetch('https://realestateadminpanel-2.onrender.com/companyInfo')
+fetch(`${import.meta.env.VITE_BASE_URL}/companyInfo`)
       .then(res => res.json())
       .then(data => {
         setInfo(data.data);
@@ -26,7 +26,7 @@ fetch('https://realestateadminpanel-2.onrender.com/companyInfo')
   Object.entries(formData).forEach(([key, value]) => form.append(key, value));
   if (logoFile) form.append('logo', logoFile);
  
-const res = await fetch(`https://realestateadminpanel-2.onrender.com/companyInfo/${info._id}`, {
+const res = await fetch(`${import.meta.env.VITE_BASE_URL}/companyInfo/${info._id}`, {
     method: 'PUT',
     body: form,
   });
@@ -48,7 +48,7 @@ const res = await fetch(`https://realestateadminpanel-2.onrender.com/companyInfo
   <label className="block text-sm font-medium text-gray-700">Company Logo</label>
   {info.Logo && ( 
     <img
-      src={`https://realestateadminpanel-2.onrender.com/uploads/${info.Logo}`} 
+      src={`${import.meta.env.VITE_BASE_URL}/uploads/${info.Logo}`} 
       alt="Company Logo"
       className="h-8 w-auto my-2 object-contain" 
       onError={(e) => {

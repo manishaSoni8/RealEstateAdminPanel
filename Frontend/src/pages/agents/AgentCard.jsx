@@ -21,7 +21,7 @@ const AgentCard = () => {
 
     const fetchAgents = async () => {
         try {
-            const res = await fetch('https://realestateadminpanel-2.onrender.com/agents');
+            const res = await fetch(`${import.meta.env.VITE_BASE_URL}/agents`);
             const data = await res.json();
             setAgents(data);
             setFilteredAgents(data);
@@ -34,7 +34,7 @@ const handleDelete = async (e, id) => {
   e.preventDefault();
   if (window.confirm('Are you sure you want to delete this agent?')) {
     try {
-const response = await fetch(`https://realestateadminpanel-2.onrender.com/agents/${id}`, {
+const response = await fetch(`${import.meta.env.VITE_BASE_URL}/agents/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,
@@ -63,7 +63,7 @@ const response = await fetch(`https://realestateadminpanel-2.onrender.com/agents
     const blockAgent = async (e, id) => {
         e.preventDefault(); // Prevent link navigation
         try {
-            const res = await fetch(`https://realestateadminpanel-2.onrender.com/agents/block/${id}`, { method: 'PATCH' });
+            const res = await fetch(`${import.meta.env.VITE_BASE_URL}/agents/block/${id}`, { method: 'PATCH' });
             const result = await res.json();
             if (!res.ok) throw new Error(result.message || 'Failed to update agent status');
 

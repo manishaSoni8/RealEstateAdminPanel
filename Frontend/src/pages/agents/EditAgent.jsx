@@ -23,7 +23,7 @@ const EditAgent = () => {
   const fetchAgent = async () => {
     try {
       const token = localStorage.getItem('token');
-const res = await axios.get(`https://realestateadminpanel-2.onrender.com/agents/${id}`, {
+const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/agents/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -52,7 +52,7 @@ const res = await axios.get(`https://realestateadminpanel-2.onrender.com/agents/
     try {
       const token = localStorage.getItem('token');
       await axios.put(
-`https://realestateadminpanel-2.onrender.com/agents/edit/${id}`,
+`${import.meta.env.VITE_BASE_URL}/agents/edit/${id}`,
         formData,
         {
           headers: {

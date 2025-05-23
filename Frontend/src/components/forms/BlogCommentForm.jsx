@@ -83,7 +83,7 @@ const BlogCommentForm = ({ blogId, onCommentAdded }) => {
       }
 
       try {
-        const response = await fetch('https://realestateadminpanel-2.onrender.com/blogs/comment', {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/blogs/comment`, {
           method: 'POST',
           body: formDataToSend,
         });

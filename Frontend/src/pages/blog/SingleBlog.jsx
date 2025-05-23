@@ -18,7 +18,7 @@ const SingleBlog = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`https://realestateadminpanel-2.onrender.com/blogs/${id}`, {
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/blogs/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -43,7 +43,7 @@ const SingleBlog = () => {
 
   const fetchBlog = async () => {
     try {
-      const response = await fetch(`https://realestateadminpanel-2.onrender.com/blogs/${id}`);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/blogs/${id}`);
       const data = await response.json();
       setBlog(data.blog);
       setComments(data.comments);
@@ -114,7 +114,7 @@ const SingleBlog = () => {
         </div>
         
         <img
-          src={`https://realestateadminpanel-2.onrender.com/uploads/${blog.Img}`}
+          src={`${import.meta.env.VITE_BASE_URL}/uploads/${blog.Img}`}
           alt={blog.Title}
           className="w-full max-h-[500px] object-cover rounded-xl mb-6"
           onError={(e) => {
@@ -144,7 +144,7 @@ const SingleBlog = () => {
               <li key={comment._id} className="bg-gray-50 p-6 rounded-lg">
                 <div className="flex items-center space-x-4 mb-4">
                   <img
-                    src={`https://realestateadminpanel-2.onrender.com/uploads/${comment.Img}`}
+                    src={`${import.meta.env.VITE_BASE_URL}/uploads/${comment.Img}`}
                     alt={comment.name}
                     className="w-12 h-12 rounded-full object-cover border-2 border-purple-200"
                     onError={(e) => {

@@ -14,7 +14,7 @@ const SingleProperty = () => {
 
   const fetchPropertyDetails = async () => {
     try {
-      const response = await fetch(`https://realestateadminpanel-2.onrender.com/properties/detail/${id}`);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/properties/detail/${id}`);
       const data = await response.json();
       setProperty(data);
       setSelectedImage(data.image);
@@ -30,12 +30,12 @@ const SingleProperty = () => {
 
   const getImageUrl = (imagePath) => {
     if (!imagePath) return defaultPropertyImage;
-    return `https://realestateadminpanel-2.onrender.com/uploads/${imagePath}`;
+    return `${import.meta.env.VITE_BASE_URL}/uploads/${imagePath}`;
   };
 
   const getVideoUrl = (videoPath) => {
     if (!videoPath) return null;
-    return `https://realestateadminpanel-2.onrender.com/uploads/${videoPath}`;
+    return `${import.meta.env.VITE_BASE_URL}/uploads/${videoPath}`;
   };
 
   return (

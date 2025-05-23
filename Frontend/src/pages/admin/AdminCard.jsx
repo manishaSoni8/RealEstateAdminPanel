@@ -20,7 +20,7 @@ const AdminCard = () => {
 
   const fetchAdmins = async () => {
     try {
-      const response = await fetch('https://realestateadminpanel-2.onrender.com/admin');
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/admin`);
       const data = await response.json();
       setAdmins(data);
       setFilteredAdmins(data);
@@ -53,7 +53,7 @@ const AdminCard = () => {
   const handleDelete = async (adminId) => {
     if (window.confirm('Are you sure you want to delete this admin?')) {
       try {
-        const response = await fetch(`https://realestateadminpanel-2.onrender.com/admin/${adminId}`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/admin/${adminId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('token')}`

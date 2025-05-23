@@ -9,11 +9,11 @@ const SingleAccount = () => {
  
   useEffect(() => {
     fetchTransaction();
-  }, []);
+  }, [id]); // Added id to dependency array
  
   const fetchTransaction = async () => {
     try {
-const res = await fetch(`https://realestateadminpanel-2.onrender.com/transactions/${id}`);
+const res = await fetch(`${import.meta.env.VITE_BASE_URL}/transactions/${id}`);
       const data = await res.json();
       setTransaction(data?.data);
     } catch (err) {
@@ -48,60 +48,80 @@ const res = await fetch(`https://realestateadminpanel-2.onrender.com/transaction
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="text-lg font-semibold text-gray-700 mb-2">User Information</h3>
-              <div className="flex items-center space-x-4">
-                <img
-                  className="w-16 h-16 rounded-full"
-                  src={
-                    transaction?.user?.profilePhoto ||
-`https://ui-avatars.com/api/?name=${transaction?.user?.name}&background=8B5CF6&color=fff`
-                  }
-                  alt={transaction?.user?.name}
-                />
-                <div>
-                  <p className="text-md font-medium text-gray-900">
-                    {transaction?.user?.name || 'N/A'}
-                  </p>
-                  <p className="text-sm text-gray-600">{transaction?.user?.email || 'N/A'}</p>
-                </div>
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Name:</span>{' '}
+                  {`${transaction.userId?.First_Name} ${transaction.userId?.Last_Name}`}
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Email:</span>{' '}
+                  {transaction.userId?.Email}
+                </p>
               </div>
             </div>
  
             <div>
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">Payment Info</h3>
-              <p className="text-sm text-gray-700">
-                <span className="font-medium">Amount:</span>{' '}
-                ${transaction?.amount?.toFixed(2) || '0.00'}
-              </p>
-              <p className="text-sm text-gray-700">
-                <span className="font-medium">Status:</span>{' '}
-                <span
-                  className={`inline-block px-2 py-1 rounded text-xs font-semibold ${
-                    transaction?.status === 'success'
-                      ? 'bg-green-100 text-green-700'
-                      : 'bg-yellow-100 text-yellow-700'
-                  }`}
-                >
-                  {transaction?.status || 'pending'}
-                </span>
-              </p>
-              <p className="text-sm text-gray-700">
-                <span className="font-medium">Date:</span>{' '}
-                {new Date(transaction?.createdAt).toLocaleString()}
-              </p>
-              {transaction?.agent && (
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">Agent Information</h3>
+              <div className="p-4 bg-gray-50 rounded-lg">
                 <p className="text-sm text-gray-700">
-Agent: {transaction.agent.name}
+                  <span className="font-medium">Name:</span>{' '}
+                  {`${transaction.agentId?.First_Name} ${transaction.agentId?.Last_Name}`}
                 </p>
-              )}
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Email:</span>{' '}
+                  {transaction.agentId?.Email}
+                </p>
+              </div>
+            </div>
+ 
+            <div>
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">Property Information</h3>
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Name:</span>{' '}
+                  {transaction.propertyId?.Property_Name}
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Type:</span>{' '}
+                  {transaction.propertyId?.Property_Type}
+                </p>
+              </div>
+            </div>
+ 
+            <div>
+              <h3 className="text-lg font-semibold text-gray-700 mb-2">Payment Details</h3>
+              <div className="p-4 bg-gray-50 rounded-lg">
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Total Amount:</span>{' '}
+                  ${transaction.totalAmount?.toLocaleString()}
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Agent Share:</span>{' '}
+                  ${transaction.agentShare?.toLocaleString()}
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Owner Share:</span>{' '}
+                  ${transaction.ownerShare?.toLocaleString()}
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Transaction ID:</span>{' '}
+                  {transaction.transactionId}
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Status:</span>{' '}
+                  <span className={`inline-block px-2 py-1 rounded text-xs font-semibold ${
+                    transaction.status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                  }`}>
+                    {transaction.status}
+                  </span>
+                </p>
+                <p className="text-sm text-gray-700">
+                  <span className="font-medium">Date:</span>{' '}
+                  {new Date(transaction.createdAt).toLocaleString()}
+                </p>
+              </div>
             </div>
           </div>
- 
-          {transaction?.notes && (
-            <div className="mt-6">
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">Notes</h3>
-              <p className="text-sm text-gray-700">{transaction.notes}</p>
-            </div>
-          )}
         </div>
       )}
     </div>

@@ -21,7 +21,7 @@ const AgentSignUpForm = () => {
         setMessage('');
 
         try {
-            const res = await fetch(`https://realestateadminpanel-2.onrender.com/agents/create`, {
+            const res = await fetch(`${import.meta.env.VITE_BASE_URL}/agents/create`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData),

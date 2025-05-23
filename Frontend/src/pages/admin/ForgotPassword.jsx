@@ -10,7 +10,7 @@ const ForgotPassword = () => {
     setError('');
     setMessage('');
     try {
-const res = await fetch('https://realestateadminpanel-2.onrender.com/admin-reset', {
+const res = await fetch(`${import.meta.env.VITE_BASE_URL}/admin-reset`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ Email: email }),

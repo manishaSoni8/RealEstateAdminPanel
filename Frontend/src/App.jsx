@@ -257,7 +257,7 @@ function LayoutWrapper() {
               }
             />
             <Route
-              path="/accounts/:id"
+              path="/transactions/:id"
               element={
                 <ProtectedRoute>
                   <SingleAccount />

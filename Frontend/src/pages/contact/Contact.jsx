@@ -21,7 +21,7 @@ const Contact = () => {
 
     const fetchAgents = async () => {
   try {
-const res = await fetch('https://realestateadminpanel-2.onrender.com/contactforms');
+const res = await fetch(`${import.meta.env.VITE_BASE_URL}/contactforms`);
     const data = await res.json();
     setContacts(data.data); 
     setFilteredContacts(data.data); 
@@ -34,7 +34,7 @@ const handleDelete = async (e, id) => {
   e.preventDefault();
   if (window.confirm('Are you sure you want to delete this agent?')) {
     try {
-const response = await fetch(`https://realestateadminpanel-2.onrender.com/contactforms/${id}`, {
+const response = await fetch(`${import.meta.env.VITE_BASE_URL}/contactforms/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`,

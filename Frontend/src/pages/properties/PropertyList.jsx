@@ -18,7 +18,7 @@ const PropertyList = ({ status, searchTerm, currentPage, propertiesPerPage, onPa
 
   const fetchProperties = async () => {
     try {
-      const response = await fetch(`https://realestateadminpanel-2.onrender.com/properties/${status}`);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/properties/${status}`);
       const data = await response.json();
       setProperties(data);
       setFilteredProperties(data);
@@ -59,7 +59,7 @@ const PropertyList = ({ status, searchTerm, currentPage, propertiesPerPage, onPa
           >
             <div className="border rounded-lg overflow-hidden hover:border-purple-300 transition-all duration-300 group">
               <img
-                src={property.image ? `https://realestateadminpanel-2.onrender.com/uploads/${property.image}` : defaultPropertyImage}
+                src={property.image ? `${import.meta.env.VITE_BASE_URL}/uploads/${property.image}` : defaultPropertyImage}
                 alt={property.name}
                 className="w-full h-48 object-cover group-hover:opacity-95 transition-all duration-300"
                 onError={(e) => {

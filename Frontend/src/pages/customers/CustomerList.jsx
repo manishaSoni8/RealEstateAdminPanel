@@ -20,7 +20,7 @@ const CustomerList = () => {
 
   const fetchCustomers = async () => {
     try {
-      const response = await fetch('https://realestateadminpanel-2.onrender.com/customers');
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/customers`);
       const data = await response.json();
       setCustomers(data);
       setFilteredCustomers(data);

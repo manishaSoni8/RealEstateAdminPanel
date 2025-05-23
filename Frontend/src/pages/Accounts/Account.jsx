@@ -24,7 +24,7 @@ const createPurchaseAndPay = async () => {
     const propertyId = 'PROPERTY_ID';
     const amount = 100; 
  
-    const res1 = await fetch('https://realestateadminpanel-2.onrender.com/create-purchase', {
+    const res1 = await fetch(`${import.meta.env.VITE_BASE_URL}/create-purchase`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ userId, propertyId, amount })
@@ -33,7 +33,7 @@ const createPurchaseAndPay = async () => {
     const { purchaseId } = await res1.json();
  
     
-    const res2 = await fetch('https://realestateadminpanel-2.onrender.com/createpayment', {
+    const res2 = await fetch(`${import.meta.env.VITE_BASE_URL}/createpayment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -52,7 +52,7 @@ const createPurchaseAndPay = async () => {
  
   const fetchTransactions = async () => {
   try {
-    const res = await fetch(`https://realestateadminpanel-2.onrender.com/transactions`);
+    const res = await fetch(`${import.meta.env.VITE_BASE_URL}/transactions`);
     const data = await res.json();
     setTransactions(data?.data || []);
     setFiltered(data?.data || []);
@@ -114,33 +114,21 @@ const createPurchaseAndPay = async () => {
             <tbody className="text-sm text-gray-700">
               {currentTransactions.map((t) => (
                 <tr key={t._id} className="border-t border-gray-200">
-                  <td className="p-3 flex items-center gap-3">
-                    <img
-                      src={
-                        t.user?.profilePhoto ||
-                        `https://ui-avatars.com/api/?name=${t.user?.name}&background=8B5CF6&color=fff`
-                      }
-                      alt={t.user?.name}
-                      className="w-8 h-8 rounded-full"
-                    />
-                    {t.user?.name || 'N/A'}
-                  </td>
-                  <td className="p-3">{t.agent?.name || 'N/A'}</td>
-                  <td className="p-3">${t.totalAmount?.toFixed(2)}</td>
                   <td className="p-3">
-                    <span
-                      className={`inline-block px-2 py-1 rounded text-xs font-semibold ${
-                        t.status === 'success'
-                          ? 'bg-green-100 text-green-700'
-                          : 'bg-yellow-100 text-yellow-700'
-                      }`}
-                    >
+                    {t.userId?.First_Name} {t.userId?.Last_Name}
+                  </td>
+                  <td className="p-3">
+                    {t.agentId?.First_Name} {t.agentId?.Last_Name}
+                  </td>
+                  <td className="p-3">${t.totalAmount?.toLocaleString()}</td>
+                  <td className="p-3">
+                    <span className={`inline-block px-2 py-1 rounded text-xs font-semibold ${
+                      t.status === 'completed' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'
+                    }`}>
                       {t.status}
                     </span>
                   </td>
-                  <td className="p-3">
-                    {new Date(t.createdAt).toLocaleDateString()}
-                  </td>
+                  <td className="p-3">{new Date(t.createdAt).toLocaleDateString()}</td>
                   <td className="p-3">
                     <button
                       onClick={() => navigate(`/transactions/${t._id}`)}
@@ -151,13 +139,6 @@ const createPurchaseAndPay = async () => {
                   </td>
                 </tr>
               ))}
-              {currentTransactions.length === 0 && (
-                <tr>
-                  <td colSpan="6" className="text-center py-6 text-gray-500">
-                    No transactions found.
-                  </td>
-                </tr>
-              )}
             </tbody>
           </table>
         </div>

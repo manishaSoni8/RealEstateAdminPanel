@@ -20,7 +20,7 @@ const EditBlog = () => {
 
   const fetchBlog = async () => {
     try {
-      const response = await fetch(`https://realestateadminpanel-2.onrender.com/blogs/${id}`);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/blogs/${id}`);
       const data = await response.json();
       setFormData({
         Auther: data.blog.Auther,
@@ -83,7 +83,7 @@ const EditBlog = () => {
 
       try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`https://realestateadminpanel-2.onrender.com/blogs/${id}`, {
+        const response = await fetch(`${import.meta.env.VITE_BASE_URL}/blogs/${id}`, {
           method: 'PUT',
           headers: {
             'Authorization': `Bearer ${token}`
@@ -162,7 +162,7 @@ const EditBlog = () => {
         <div>
           <label className="block text-gray-700 mb-2">Current Image</label>
           <img
-            src={`https://realestateadminpanel-2.onrender.com/uploads/${currentImg}`}
+            src={`${import.meta.env.VITE_BASE_URL}/uploads/${currentImg}`}
             alt="Current blog image"
             className="w-32 h-32 object-cover mb-2"
           />
