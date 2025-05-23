@@ -13,16 +13,16 @@ const Account = () => {
  
   useEffect(() => {
     fetchTransactions();
-  createPurchaseAndPay();
+  createPurchaseAndPay
     //  fetchinitiatepayment();
   }, []);
 
 const createPurchaseAndPay = async () => {
   try {
-    // Replace these with actual userId, propertyId, and amount
+    
     const userId = 'USER_ID';
     const propertyId = 'PROPERTY_ID';
-    const amount = 100; // e.g., $100
+    const amount = 100; 
  
     const res1 = await fetch('https://realestateadminpanel-2.onrender.com/create-purchase', {
       method: 'POST',
@@ -32,13 +32,13 @@ const createPurchaseAndPay = async () => {
  
     const { purchaseId } = await res1.json();
  
-    // Call createPayment using the purchaseId
+    
     const res2 = await fetch('https://realestateadminpanel-2.onrender.com/createpayment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         purchaseId,
-        token: { id: 'tok_visa' } // test token for Stripe
+        token: { id: 'tok_visa' } 
       })
     });
  

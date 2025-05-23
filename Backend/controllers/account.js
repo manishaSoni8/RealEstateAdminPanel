@@ -35,56 +35,65 @@ exports.createPayment = async (req, res) => {
     const property = purchase.propertyId;
     const user = purchase.userId;
     const agent = await Agent.findById(property.userId);
-    if (!agent || !agent.stripeAccountId) {
+    if (!agent || !agent.AccountNo) {
       return res.status(400).json({ message: 'Agent Stripe account not found' });
     }
  
-    const amount = purchase.amount * 100; 
+    const amount = purchase.amount * 100;
     const agentShare = amount * 0.7;
     const ownerShare = amount * 0.3;
  
     const charge = await stripe.charges.create({
       amount,
       currency: 'usd',
-      source: token.id,
+source: token.id,
       description: `Property Purchase: ${property._id}`,
-      receipt_email: user.email,
+receipt_email: user.email,
     });
  
     await stripe.transfers.create({
       amount: agentShare,
       currency: 'usd',
-      destination: agent.stripeAccountId,
-      transfer_group: charge.id,
+      destination: agent.AccountNo,
+transfer_group: charge.id,
     });
  
     // Update Purchase
-    purchase.transactionId = charge.id;
+purchase.transactionId = charge.id;
     purchase.status = 'completed';
-    await purchase.save();
+ 
+    try {
+      await purchase.save();
+    } catch (saveError) {
+      console.error('Failed to update purchase:', saveError);
+      return res.status(500).json({ message: 'Failed to update purchase after payment' });
+    }
  
     // Save Payment Transaction
     const transaction = new PaymentTransaction({
       agentId: property.userId,
       userId: user._id,
       propertyId: property._id,
-      transactionId: charge.id,
+transactionId: charge.id,
       totalAmount: amount / 100,
       agentShare: agentShare / 100,
       ownerShare: ownerShare / 100,
       status: 'completed',
     });
-    await transaction.save();
  
-
-    
+    try {
+      await transaction.save();
+    } catch (transactionSaveError) {
+      console.error('Failed to save payment transaction:', transactionSaveError);
+      return res.status(500).json({ message: 'Failed to save payment transaction' });
+    }
+ 
     res.status(200).json({ message: 'Payment successful', charge, transaction });
   } catch (err) {
     console.error(err);
     res.status(500).json({ message: 'Payment failed' });
   }
 };
- 
 exports.getAllTransactions = async (req, res) => {
   try {
     const transactions = await PaymentTransaction.find()

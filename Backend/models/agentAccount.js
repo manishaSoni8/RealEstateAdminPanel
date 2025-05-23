@@ -24,7 +24,7 @@ const agentAccountSchema = new Schema({
     required: true
   },
   AccountNo: {
-    type: Number,
+    type: String,
     required: true
   },
   createdAt: {
