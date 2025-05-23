@@ -73,21 +73,8 @@ const res = await fetch(`${import.meta.env.VITE_BASE_URL}/transactions/${id}`);
                 </p>
               </div>
             </div>
- 
-            <div>
-              <h3 className="text-lg font-semibold text-gray-700 mb-2">Property Information</h3>
-              <div className="p-4 bg-gray-50 rounded-lg">
-                <p className="text-sm text-gray-700">
-                  <span className="font-medium">Name:</span>{' '}
-                  {transaction.propertyId?.Property_Name}
-                </p>
-                <p className="text-sm text-gray-700">
-                  <span className="font-medium">Type:</span>{' '}
-                  {transaction.propertyId?.Property_Type}
-                </p>
-              </div>
-            </div>
- 
+
+            
             <div>
               <h3 className="text-lg font-semibold text-gray-700 mb-2">Payment Details</h3>
               <div className="p-4 bg-gray-50 rounded-lg">
