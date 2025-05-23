@@ -10,9 +10,10 @@ const Sidebar = () => {
     { title: 'Properties', icon: '🏠', path: '/properties' },
     { title: 'Admin', icon: '👨‍💼', path: '/admin' },
     { title: 'Agents', icon: '👥', path: '/agent' },
-    { title: 'Customers', icon: '👤', path: '/customers' }, // Add this line
+    { title: 'Customers', icon: '👤', path: '/customers' }, 
     { title: 'Blogs', icon: '📝', path: '/blogs' },
     { title: 'Contact', icon: '📞', path: '/contact' },
+   { title: 'Accounts', icon: '📖', path: '/accounts' },
     { title: 'Settings', icon: '⚙️', path: '/settings' },
   ];
 
