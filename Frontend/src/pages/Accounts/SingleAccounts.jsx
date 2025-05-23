@@ -25,12 +25,7 @@ const res = await fetch(`${import.meta.env.VITE_BASE_URL}/transactions/${id}`);
  
   return (
     <div className="bg-white rounded-xl p-6 shadow-lg">
-      <button
-        className="mb-4 text-purple-600 font-medium hover:underline"
-        onClick={() => navigate(-1)}
-      >
-        &larr; Back to Transactions
-      </button>
+     
  
       {loading ? (
         <div className="text-center py-12">

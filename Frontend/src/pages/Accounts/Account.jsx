@@ -101,14 +101,14 @@ const createPurchaseAndPay = async () => {
       ) : (
         <div className="overflow-x-auto">
           <table className="min-w-full table-auto border border-gray-200">
-            <thead className="bg-gray-100 text-gray-700 text-sm">
+            <thead className="bg-gray-100 text-gray-500 text-sm">
               <tr>
-                <th className="p-3 text-left">User</th>
-                <th className="p-3 text-left">Agent</th>
-                <th className="p-3 text-left">Amount</th>
-                <th className="p-3 text-left">Status</th>
-                <th className="p-3 text-left">Date</th>
-                <th className="p-3 text-left">Actions</th>
+                <th className="p-3 text-left text-xs font-medium">USER</th>
+                <th className="p-3 text-left text-xs font-medium">AGENT</th>
+                <th className="p-3 text-left text-xs font-medium">AMOUNT</th>
+                <th className="p-3 text-left text-xs font-medium">STATUS</th>
+                <th className="p-3 text-left text-xs font-medium">DATE</th>
+                <th className="p-3 text-left text-xs font-medium">ACTIONS</th>
               </tr>
             </thead>
             <tbody className="text-sm text-gray-700">
