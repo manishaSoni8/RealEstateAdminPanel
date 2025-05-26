@@ -25,7 +25,8 @@ exports.getAllAgents = async (req, res) => {
  exports.getAgentById= async (req, res) => {
          try {
             const agentType = await UserType.findOne({ user_type_name: 'agent' });
-             const agent = await User.findOne({ _id: req.params.id, user_type_id: agentType._id });
+             const agent = await User.findOne({ _id: req.params.id, user_type_id: agentType._id }).populate('is_subscribed');
+             
              if (!agent) {
                  return res.status(404).json({ message: 'Admin not found' });
              }

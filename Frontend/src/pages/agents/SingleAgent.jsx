@@ -26,7 +26,7 @@ const SingleAgent = () => {
   };
   const fetchAgentProperties = async () => {
     try {
-const response = await fetch(`${import.meta.env.VITE_BASE_URL}/agents/${id}/properties`);
+      const response = await fetch(`${import.meta.env.VITE_BASE_URL}/agents/${id}/properties`);
       const data = await response.json();
       setProperties(data);
       setLoading(false);
@@ -43,7 +43,7 @@ const response = await fetch(`${import.meta.env.VITE_BASE_URL}/agents/${id}/prop
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-white rounded-lg shadow-lg p-8">
         <div className="flex items-center space-x-6 mb-8">
-          <img 
+          <img
             src={agent.user_image || `https://ui-avatars.com/api/?name=${agent.First_Name}+${agent.Last_Name}&background=8B5CF6&color=fff`}
             alt={`${agent.First_Name} ${agent.Last_Name}`}
             className="w-24 h-24 rounded-full"
@@ -71,6 +71,15 @@ const response = await fetch(`${import.meta.env.VITE_BASE_URL}/agents/${id}/prop
               <p><span className="font-semibold">Role:</span> {agent.role || 'Agent'}</p>
               <p><span className="font-semibold">Join Date:</span> {new Date(agent.createdAt).toLocaleDateString()}</p>
               <p><span className="font-semibold">Last Updated:</span> {new Date(agent.updatedAt).toLocaleDateString()}</p>
+              <p>
+                <span className="font-semibold">Subscription Plan:</span>{" "}
+                <span className={`px-2 py-1 rounded-full text-white text-sm font-medium ${agent.is_subscribed?.name === 'Gold' ? 'bg-yellow-500' :
+                    agent.is_subscribed?.name === 'Silver' ? 'bg-gray-500' : 'bg-green-500'
+                  }`}>
+                  {agent.is_subscribed?.name || 'Free'}
+                </span>
+              </p>
+
             </div>
           </div>
 
@@ -106,16 +115,16 @@ const response = await fetch(`${import.meta.env.VITE_BASE_URL}/agents/${id}/prop
                 </p>
               </div>
               <div className="bg-purple-50 p-6 rounded-lg mt-6">
-          <h3 className="text-lg font-semibold text-purple-800">Properties Created by {agent.First_Name}</h3>
-          <p className="text-sm mt-2"><strong>Total Properties:</strong> {properties.length}</p>
-          <ul className="list-disc pl-5 mt-2 text-purple-800">
-            {properties.map((prop) => (
-              <Link to={`/properties/${prop._id}`}>
-              <li key={prop._id}>{prop.name}</li>
-              </Link>
-            ))}
-          </ul>
-        </div>
+                <h3 className="text-lg font-semibold text-purple-800">Properties Created by {agent.First_Name}</h3>
+                <p className="text-sm mt-2"><strong>Total Properties:</strong> {properties.length}</p>
+                <ul className="list-disc pl-5 mt-2 text-purple-800">
+                  {properties.map((prop) => (
+                    <Link to={`/properties/${prop._id}`}>
+                      <li key={prop._id}>{prop.name}</li>
+                    </Link>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
         </div>

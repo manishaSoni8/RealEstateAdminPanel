@@ -31,6 +31,7 @@ const contactRoutes =require('./routes/contact');
 const localUserRoutes = require('./routes/localUser');
 const compantinfoRoutes =require('./routes/settings');
 const accountController=require('./routes/account');
+const plansController=require('./routes/plans');
 // Add this line with other route uses
 app.use(localUserRoutes);
 app.use('/admin', adminRoutes);
@@ -42,6 +43,7 @@ app.use(blogRoutes);
 app.use(contactRoutes);
 app.use(compantinfoRoutes);
 app.use(accountController);
+app.use('/plans', plansController);
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error(err.stack);

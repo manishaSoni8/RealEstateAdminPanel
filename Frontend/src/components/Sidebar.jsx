@@ -15,6 +15,7 @@ const Sidebar = () => {
     { title: 'Contact', icon: '📞', path: '/contact' },
    { title: 'Accounts', icon: '📖', path: '/accounts' },
     { title: 'Settings', icon: '⚙️', path: '/settings' },
+    { title: 'Subcription Plans', icon: '💳', path: '/plans' },
   ];
 
   const handleLogout = () => {

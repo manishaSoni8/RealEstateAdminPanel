@@ -33,6 +33,7 @@ import SingleCustomer from './pages/customers/SingleCustomer';
 import CompanyInfo from './pages/settings/Settings';
 import Account from './pages/Accounts/Account';
 import SingleAccount from './pages/Accounts/SingleAccounts';
+import Plans from './pages/plans/plans';
 function LayoutWrapper() {
   const location = useLocation();
  
@@ -261,6 +262,14 @@ function LayoutWrapper() {
               element={
                 <ProtectedRoute>
                   <SingleAccount />
+                </ProtectedRoute>
+              }
+            />
+             <Route
+              path="/plans"
+              element={
+                <ProtectedRoute>
+                  < Plans/>
                 </ProtectedRoute>
               }
             />

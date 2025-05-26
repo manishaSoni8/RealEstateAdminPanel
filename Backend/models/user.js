@@ -70,6 +70,12 @@ const User = mongoose.models.User || mongoose.model('User', new mongoose.Schema(
         type: Boolean,
         default: false
     },
+     is_subscribed: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Plan',
+        required: true,
+        default: null
+    },
     resetToken: String,
     resetTokenExpiration: Date
 }, {
