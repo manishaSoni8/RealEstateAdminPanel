@@ -83,7 +83,7 @@ const createPurchaseAndPay = async () => {
   return (
     <div className="bg-white rounded-xl p-6 shadow-lg">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-2xl font-bold text-purple-800">All Transactions</h2>
+        <h2 className="text-3xl font-bold text-purple-800">All Transactions</h2>
         <input
           type="text"
           placeholder="Search by User/Agent"

@@ -14,8 +14,8 @@ const Sidebar = () => {
     { title: 'Blogs', icon: '📝', path: '/blogs' },
     { title: 'Contact', icon: '📞', path: '/contact' },
    { title: 'Accounts', icon: '📖', path: '/accounts' },
-    { title: 'Settings', icon: '⚙️', path: '/settings' },
     { title: 'Subcription Plans', icon: '💳', path: '/plans' },
+     { title: 'Settings', icon: '⚙️', path: '/settings' },
   ];
 
   const handleLogout = () => {
