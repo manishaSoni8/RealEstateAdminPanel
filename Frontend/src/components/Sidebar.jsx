@@ -33,7 +33,6 @@ const Sidebar = () => {
       <div className="flex items-center justify-between p-4 border-b">
         <div className={`font-bold ${isCollapsed ? 'hidden' : 'block'}`}>
           Garo Estate
-          lore
         </div>
         <button
           onClick={() => setIsCollapsed(!isCollapsed)}
